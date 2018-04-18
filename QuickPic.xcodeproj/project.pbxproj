@@ -13,6 +13,8 @@
 		B583A1BF2086C8FE002C4EA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B583A1BD2086C8FE002C4EA7 /* LaunchScreen.storyboard */; };
 		B583A1CA2086C8FE002C4EA7 /* QuickPicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B583A1C92086C8FE002C4EA7 /* QuickPicTests.swift */; };
 		B583A2072086CED0002C4EA7 /* CorePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B583A2062086CED0002C4EA7 /* CorePageViewController.swift */; };
+		B59BA6222086F178005B66CB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59BA6212086F178005B66CB /* CameraViewController.swift */; };
+		B59BA6262086F716005B66CB /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		B583A1C92086C8FE002C4EA7 /* QuickPicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPicTests.swift; sourceTree = "<group>"; };
 		B583A1CB2086C8FE002C4EA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B583A2062086CED0002C4EA7 /* CorePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorePageViewController.swift; sourceTree = "<group>"; };
+		B59BA6212086F178005B66CB /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,8 @@
 				B583A1BB2086C8FE002C4EA7 /* Assets.xcassets */,
 				B583A1BD2086C8FE002C4EA7 /* LaunchScreen.storyboard */,
 				B583A1C02086C8FE002C4EA7 /* Info.plist */,
+				B59BA6212086F178005B66CB /* CameraViewController.swift */,
+				B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */,
 			);
 			path = QuickPic;
 			sourceTree = "<group>";
@@ -197,8 +203,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B59BA6262086F716005B66CB /* UIViewController+Helpers.swift in Sources */,
 				B583A2072086CED0002C4EA7 /* CorePageViewController.swift in Sources */,
 				B583A1B52086C8FE002C4EA7 /* AppDelegate.swift in Sources */,
+				B59BA6222086F178005B66CB /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
