@@ -65,9 +65,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MmK-G3-Ief">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UdH-c1-41f">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Eq-hd-fJ3">
                                         <rect key="frame" x="0.0" y="273.5" width="320" height="21"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="0.4960669948630137" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="0.80345676369863017" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -75,8 +78,12 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="UdH-c1-41f" secondAttribute="bottom" id="4Jt-vL-zQ4"/>
                                     <constraint firstItem="1Eq-hd-fJ3" firstAttribute="leading" secondItem="MmK-G3-Ief" secondAttribute="leading" id="6UM-eV-kZe"/>
+                                    <constraint firstAttribute="trailing" secondItem="UdH-c1-41f" secondAttribute="trailing" id="9Ve-1a-63i"/>
                                     <constraint firstAttribute="trailing" secondItem="1Eq-hd-fJ3" secondAttribute="trailing" id="eKe-V7-eBs"/>
+                                    <constraint firstItem="UdH-c1-41f" firstAttribute="top" secondItem="MmK-G3-Ief" secondAttribute="top" id="fZ5-HX-d33"/>
+                                    <constraint firstItem="UdH-c1-41f" firstAttribute="leading" secondItem="MmK-G3-Ief" secondAttribute="leading" id="jay-V1-fpV"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Oj-Y8-HTQ">
@@ -122,8 +129,9 @@
                     </view>
                     <connections>
                         <outlet property="captureButton" destination="dwu-QQ-oyr" id="a9r-We-haf"/>
+                        <outlet property="capturedImageView" destination="UdH-c1-41f" id="Jik-ho-40z"/>
                         <outlet property="editsOverlayView" destination="MmK-G3-Ief" id="dqx-gR-2Qb"/>
-                        <outlet property="previewView" destination="Owe-5u-vFt" id="ZF4-tO-865"/>
+                        <outlet property="livePreviewView" destination="Owe-5u-vFt" id="iKO-Ch-hlf"/>
                         <outlet property="uiOverlayView" destination="8Oj-Y8-HTQ" id="KFj-hy-Yx9"/>
                     </connections>
                 </viewController>
