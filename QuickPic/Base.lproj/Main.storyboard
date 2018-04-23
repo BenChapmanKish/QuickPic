@@ -65,6 +65,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Oj-Y8-HTQ">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNv-C7-KfA">
+                                        <rect key="frame" x="15" y="15" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="UNv-C7-KfA" secondAttribute="height" multiplier="1:1" id="OyQ-zp-Bbo"/>
+                                            <constraint firstAttribute="width" constant="30" id="kAR-Tp-4cD"/>
+                                        </constraints>
+                                        <state key="normal" image="Flash-Auto"/>
+                                        <connections>
+                                            <action selector="flashButtonTapped:" destination="cyh-iV-VCv" eventType="touchUpInside" id="KXF-Rc-k9J"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwu-QQ-oyr">
                                         <rect key="frame" x="120" y="428" width="80" height="80"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -74,13 +85,15 @@
                                         </constraints>
                                         <state key="normal" image="Capture"/>
                                         <connections>
-                                            <action selector="onCaptureButtonTapped:" destination="cyh-iV-VCv" eventType="touchUpInside" id="eoU-Zi-ELH"/>
+                                            <action selector="captureButtonTapped:" destination="cyh-iV-VCv" eventType="touchUpInside" id="eoU-Zi-ELH"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="dwu-QQ-oyr" firstAttribute="centerX" secondItem="8Oj-Y8-HTQ" secondAttribute="centerX" id="6Pw-6O-5D7"/>
+                                    <constraint firstItem="UNv-C7-KfA" firstAttribute="centerX" secondItem="8Oj-Y8-HTQ" secondAttribute="leading" constant="30" id="Wdu-Cp-8SZ"/>
+                                    <constraint firstItem="UNv-C7-KfA" firstAttribute="centerY" secondItem="8Oj-Y8-HTQ" secondAttribute="top" constant="30" id="oDh-CS-CWy"/>
                                     <constraint firstAttribute="bottom" secondItem="dwu-QQ-oyr" secondAttribute="centerY" constant="80" id="wyF-Mp-kvm"/>
                                 </constraints>
                             </view>
@@ -99,6 +112,7 @@
                         <viewLayoutGuide key="safeArea" id="r1m-9s-1A4"/>
                     </view>
                     <connections>
+                        <outlet property="flashIndicatorButton" destination="UNv-C7-KfA" id="Wur-cf-TG3"/>
                         <outlet property="livePreviewView" destination="Owe-5u-vFt" id="iKO-Ch-hlf"/>
                         <outlet property="uiOverlayView" destination="8Oj-Y8-HTQ" id="KFj-hy-Yx9"/>
                         <segue destination="5oi-Hh-Sqq" kind="presentation" identifier="showEditPicVC" animates="NO" modalPresentationStyle="fullScreen" id="aDc-do-Hii"/>
@@ -190,5 +204,6 @@
     <resources>
         <image name="Capture" width="240" height="240"/>
         <image name="Exit" width="256" height="256"/>
+        <image name="Flash-Auto" width="256" height="256"/>
     </resources>
 </document>

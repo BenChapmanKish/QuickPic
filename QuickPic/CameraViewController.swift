@@ -27,6 +27,7 @@ enum CameraPageState {
 class CameraViewController: UIViewController {
     @IBOutlet var livePreviewView: UIView!
     @IBOutlet var uiOverlayView: UIView!
+    @IBOutlet var flashIndicatorButton: UIButton!
     
     var captureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
@@ -34,6 +35,7 @@ class CameraViewController: UIViewController {
     
     
     var state: CameraPageState = .livePreview
+    var flashMode: AVCaptureDevice.FlashMode = .auto
     var cameraPosition: AVCaptureDevice.Position = .back
     
     
@@ -104,8 +106,26 @@ class CameraViewController: UIViewController {
         }
     }
     
+    @IBAction func flashButtonTapped(_ sender: UIButton) {
+        self.cycleFlashMode()
+    }
     
-    @IBAction func onCaptureButtonTapped(_ sender: Any) {
+    func cycleFlashMode() {
+        switch self.flashMode {
+        case .on:
+            self.flashMode = .auto
+            self.flashIndicatorButton.setImage(#imageLiteral(resourceName: "Flash-Auto"), for: .normal)
+        case .auto:
+            self.flashMode = .off
+            self.flashIndicatorButton.setImage(#imageLiteral(resourceName: "Flash-Off"), for: .normal)
+        case .off:
+            self.flashMode = .on
+            self.flashIndicatorButton.setImage(#imageLiteral(resourceName: "Flash-On"), for: .normal)
+        }
+    }
+    
+    
+    @IBAction func captureButtonTapped(_ sender: Any) {
         switch self.state {
         case .livePreview:
             self.captureImage()
@@ -122,7 +142,7 @@ class CameraViewController: UIViewController {
         self.state = .capturingImage
         
         let photoSettings = AVCapturePhotoSettings()
-        photoSettings.flashMode = .auto
+        photoSettings.flashMode = self.flashMode
         
         capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)
     }
