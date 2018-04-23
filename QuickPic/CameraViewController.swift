@@ -178,6 +178,7 @@ class CameraViewController: UIViewController {
 extension CameraViewController : EditPageDelegate {
     func editPageWillDismiss() {
         if let captureSession = self.captureSession {
+            self.state = .livePreview
             captureSession.startRunning()
         } else {
             self.setupCamera()
