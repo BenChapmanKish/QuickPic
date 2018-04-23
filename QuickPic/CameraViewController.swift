@@ -9,20 +9,10 @@
 import UIKit
 import AVFoundation
 
-enum CameraPageState: Equatable {
-    case livePreview(cameraPosition: AVCaptureDevice.Position)
-    case capturingImage(cameraPosition: AVCaptureDevice.Position)
+enum CameraPageState {
+    case livePreview
+    case capturingImage
     case editing(capturedImage: UIImage)
-    
-    func cameraPosition() -> AVCaptureDevice.Position? {
-        switch self {
-        case .livePreview(let position),
-             .capturingImage(let position):
-            return position
-        default:
-            return nil
-        }
-    }
     
     func capturedImage() -> UIImage? {
         switch self {
@@ -37,28 +27,31 @@ enum CameraPageState: Equatable {
 class CameraViewController: UIViewController {
     @IBOutlet var livePreviewView: UIView!
     @IBOutlet var uiOverlayView: UIView!
-    @IBOutlet var editsOverlayView: UIView!
-    @IBOutlet var capturedImageView: UIImageView!
-    
-    @IBOutlet var captureButton: UIButton!
     
     var captureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var capturePhotoOutput: AVCapturePhotoOutput?
     
-    var state: CameraPageState = .livePreview(cameraPosition: .back)
+    
+    var state: CameraPageState = .livePreview
+    var cameraPosition: AVCaptureDevice.Position = .back
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupSwitchCameraGesture()
-        self.setupCamera(forPosition: .back)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setupCamera(forPosition: self.cameraPosition)
     }
     
     func setupCamera(forPosition position: AVCaptureDevice.Position) {
         guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: position) else { return }
         
-        self.state = .livePreview(cameraPosition: position)
+        self.state = .livePreview
+        self.cameraPosition = position
         
         // teardown
         self.captureSession?.stopRunning()
@@ -96,27 +89,20 @@ class CameraViewController: UIViewController {
         
         
         captureSession.startRunning()
-        
-        self.enterLivePreviewState(withPosition: position)
     }
     
     private func setupSwitchCameraGesture() {
-        let tapGR = UITapGestureRecognizer(target: self, action: #selector(CameraViewController.handleTap(_:)))
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(CameraViewController.handleDoubleTap(_:)))
         tapGR.delegate = self
         tapGR.numberOfTapsRequired = 2
         self.uiOverlayView.addGestureRecognizer(tapGR)
     }
     
     private func switchCameras() {
-        switch self.state {
-        case .livePreview(let cameraPosition):
-            if cameraPosition == .back {
-                self.setupCamera(forPosition: .front)
-            } else {
-                self.setupCamera(forPosition: .back)
-            }
-        default:
-            break
+        if self.cameraPosition == .back {
+            self.setupCamera(forPosition: .front)
+        } else {
+            self.setupCamera(forPosition: .back)
         }
     }
     
@@ -133,10 +119,9 @@ class CameraViewController: UIViewController {
     }
     
     func captureImage() {
-        guard let capturePhotoOutput = self.capturePhotoOutput,
-            let cameraPosition = self.state.cameraPosition() else { return }
+        guard let capturePhotoOutput = self.capturePhotoOutput else { return }
         
-        self.state = .capturingImage(cameraPosition: cameraPosition)
+        self.state = .capturingImage
         
         let photoSettings = AVCapturePhotoSettings()
         photoSettings.flashMode = .auto
@@ -144,52 +129,29 @@ class CameraViewController: UIViewController {
         capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)
     }
     
-    func drawEditsOnCapturedImage() -> UIImage? {
-        guard let capturedImage = self.state.capturedImage() else { return nil }
+    func enterEditState(withImage image: UIImage) {
+        var correctedImage: UIImage = image
         
-        let layer = self.editsOverlayView.layer
-        let scale = UIScreen.main.scale
-        UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        
-        capturedImage.draw(in: layer.frame)
-        
-        layer.render(in: context)
-        guard let editedImage = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-        UIGraphicsEndImageContext()
-        
-        return editedImage
-    }
-    
-    func enterEditState(withImage image: UIImage, andCameraPosition position: AVCaptureDevice.Position) {
-        var flippedImage: UIImage?
-        if position == .front,
+        // If front-facing camera, flip the image horizontally
+        if self.cameraPosition == .front,
             let cgimage = image.cgImage {
-            flippedImage = UIImage(cgImage: cgimage, scale: image.scale, orientation: .leftMirrored)
+            correctedImage = UIImage(cgImage: cgimage, scale: image.scale, orientation: .leftMirrored)
         }
         
+        self.state = .editing(capturedImage: correctedImage)
         
-        self.state = .editing(capturedImage: flippedImage ?? image)
-        self.editsOverlayView.isHidden = false
-        self.capturedImageView.isHidden = false
-        self.capturedImageView.image = flippedImage ?? image
-        self.captureSession?.stopRunning()
-        self.livePreviewView.isHidden = true
+        self.performSegue(withIdentifier: "showEditPicVC", sender: nil)
     }
     
-    func enterLivePreviewState(withPosition position: AVCaptureDevice.Position) {
-        self.state = .livePreview(cameraPosition: position)
-        self.editsOverlayView.isHidden = true
-        self.capturedImageView.isHidden = true
-        self.capturedImageView.image = nil
-        self.captureSession?.startRunning()
-        self.livePreviewView.isHidden = false
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showEditPicVC" {
+            guard let editPicVC = segue.destination as? EditPicViewController else { return }
+            
+            editPicVC.capturedImage = self.state.capturedImage()
+            self.captureSession?.stopRunning()
+        }
     }
     
-    func saveImageToCameraRoll() {
-        guard let editedImage = self.drawEditsOnCapturedImage() else { return }
-        UIImageWriteToSavedPhotosAlbum(editedImage, nil, nil, nil)
-    }
 
     /*
     // MARK: - Navigation
@@ -204,11 +166,16 @@ class CameraViewController: UIViewController {
 
 extension CameraViewController : AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        if let error = error {
+            self.showAlertWithOkButton(title: "An error happened", message: error.localizedDescription)
+            return
+        }
+        
         switch self.state {
-        case .capturingImage(let position):
+        case .capturingImage:
             guard let imageData = photo.fileDataRepresentation(),
                 let capturedImage = UIImage.init(data: imageData) else { return }
-            self.enterEditState(withImage: capturedImage, andCameraPosition: position)
+            self.enterEditState(withImage: capturedImage)
         default:
             self.setupCamera(forPosition: .back)
         }
@@ -216,7 +183,7 @@ extension CameraViewController : AVCapturePhotoCaptureDelegate {
 }
 
 extension CameraViewController : UIGestureRecognizerDelegate {
-    @objc func handleTap(_ gesture: UITapGestureRecognizer){
+    @objc func handleDoubleTap(_ gesture: UITapGestureRecognizer){
         self.switchCameras()
     }
 }
