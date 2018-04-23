@@ -124,6 +124,9 @@ class CameraViewController: UIViewController {
         }
     }
     
+    @IBAction func swapCameraButtonTapped(_ sender: UIButton) {
+        self.switchCameras()
+    }
     
     @IBAction func captureButtonTapped(_ sender: Any) {
         switch self.state {

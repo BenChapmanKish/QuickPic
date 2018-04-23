@@ -76,6 +76,17 @@
                                             <action selector="flashButtonTapped:" destination="cyh-iV-VCv" eventType="touchUpInside" id="KXF-Rc-k9J"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bad-mm-lXJ">
+                                        <rect key="frame" x="275" y="15" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="bad-mm-lXJ" secondAttribute="height" multiplier="1:1" id="QZj-bX-ujj"/>
+                                            <constraint firstAttribute="width" constant="30" id="tAG-in-yVH"/>
+                                        </constraints>
+                                        <state key="normal" image="Swap-Camera"/>
+                                        <connections>
+                                            <action selector="swapCameraButtonTapped:" destination="cyh-iV-VCv" eventType="touchUpInside" id="cDN-X4-heg"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwu-QQ-oyr">
                                         <rect key="frame" x="120" y="428" width="80" height="80"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -93,6 +104,8 @@
                                 <constraints>
                                     <constraint firstItem="dwu-QQ-oyr" firstAttribute="centerX" secondItem="8Oj-Y8-HTQ" secondAttribute="centerX" id="6Pw-6O-5D7"/>
                                     <constraint firstItem="UNv-C7-KfA" firstAttribute="centerX" secondItem="8Oj-Y8-HTQ" secondAttribute="leading" constant="30" id="Wdu-Cp-8SZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="bad-mm-lXJ" secondAttribute="centerX" constant="30" id="YdS-aT-Lcf"/>
+                                    <constraint firstItem="bad-mm-lXJ" firstAttribute="centerY" secondItem="8Oj-Y8-HTQ" secondAttribute="top" constant="30" id="jWE-ee-NOL"/>
                                     <constraint firstItem="UNv-C7-KfA" firstAttribute="centerY" secondItem="8Oj-Y8-HTQ" secondAttribute="top" constant="30" id="oDh-CS-CWy"/>
                                     <constraint firstAttribute="bottom" secondItem="dwu-QQ-oyr" secondAttribute="centerY" constant="80" id="wyF-Mp-kvm"/>
                                 </constraints>
@@ -205,5 +218,6 @@
         <image name="Capture" width="240" height="240"/>
         <image name="Exit" width="256" height="256"/>
         <image name="Flash-Auto" width="256" height="256"/>
+        <image name="Swap-Camera" width="256" height="256"/>
     </resources>
 </document>
