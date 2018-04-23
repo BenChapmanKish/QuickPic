@@ -175,13 +175,26 @@
                                         </constraints>
                                         <state key="normal" image="Exit"/>
                                         <connections>
-                                            <action selector="onExitButtonTapped:" destination="5oi-Hh-Sqq" eventType="touchUpInside" id="pai-fy-KbC"/>
+                                            <action selector="exitButtonTapped:" destination="5oi-Hh-Sqq" eventType="touchUpInside" id="pai-fy-KbC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWI-eG-oZ8">
+                                        <rect key="frame" x="15" y="503" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="nWI-eG-oZ8" secondAttribute="height" multiplier="1:1" id="Fn1-dx-u3X"/>
+                                            <constraint firstAttribute="width" constant="30" id="dsV-az-av4"/>
+                                        </constraints>
+                                        <state key="normal" image="Save"/>
+                                        <connections>
+                                            <action selector="saveButtonTapped:" destination="5oi-Hh-Sqq" eventType="touchUpInside" id="t9g-uf-0YI"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="nWI-eG-oZ8" secondAttribute="centerY" constant="30" id="C6C-oD-lqx"/>
                                     <constraint firstItem="8vZ-g8-kHR" firstAttribute="centerX" secondItem="5hy-Kn-KtY" secondAttribute="leading" constant="30" id="b0F-Yb-Z95"/>
+                                    <constraint firstItem="nWI-eG-oZ8" firstAttribute="centerX" secondItem="5hy-Kn-KtY" secondAttribute="leading" constant="30" id="hIe-Hh-JGf"/>
                                     <constraint firstItem="8vZ-g8-kHR" firstAttribute="centerY" secondItem="5hy-Kn-KtY" secondAttribute="top" constant="30" id="x3L-GD-GAi"/>
                                 </constraints>
                             </view>
@@ -218,6 +231,7 @@
         <image name="Capture" width="240" height="240"/>
         <image name="Exit" width="256" height="256"/>
         <image name="Flash-Auto" width="256" height="256"/>
+        <image name="Save" width="256" height="256"/>
         <image name="Swap-Camera" width="256" height="256"/>
     </resources>
 </document>

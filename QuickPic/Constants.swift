@@ -17,5 +17,6 @@ struct Ids {
 struct UserFacingStrings {
     struct Errors {
         static let genericErrorTitle = "An error happened"
+        static let couldNotSaveImage = "We couldn't save the image to your camera roll!"
     }
 }

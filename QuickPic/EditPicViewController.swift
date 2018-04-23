@@ -48,13 +48,19 @@ class EditPicViewController: UIViewController {
         return editedImage
     }
     
+    @IBAction func saveButtonTapped(_ sender: UIButton) {
+        self.saveImageToCameraRoll()
+    }
     
     func saveImageToCameraRoll() {
-        guard let editedImage = self.drawEditsOnCapturedImage() else { return }
+        guard let editedImage = self.drawEditsOnCapturedImage() else {
+            self.showGenericErrorAlert(withMessage: UserFacingStrings.Errors.couldNotSaveImage)
+            return
+        }
         UIImageWriteToSavedPhotosAlbum(editedImage, nil, nil, nil)
     }
 
-    @IBAction func onExitButtonTapped(_ sender: UIButton) {
+    @IBAction func exitButtonTapped(_ sender: UIButton) {
         self.delegate?.editPageWillDismiss()
         self.dismiss(animated: false, completion: nil)
     }
