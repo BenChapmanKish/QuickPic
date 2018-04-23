@@ -40,14 +40,12 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupSwitchCameraGesture()
+        self.setupCamera()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.setupCamera(forPosition: self.cameraPosition)
-    }
-    
-    func setupCamera(forPosition position: AVCaptureDevice.Position) {
+    func setupCamera(forPosition cameraPosition: AVCaptureDevice.Position? = nil) {
+        let position = cameraPosition ?? self.cameraPosition
+        
         guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: position) else { return }
         
         self.state = .livePreview
@@ -145,9 +143,10 @@ class CameraViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showEditPicVC" {
-            guard let editPicVC = segue.destination as? EditPicViewController else { return }
+            guard let editPicVC = segue.destination as? EditPicViewController,
+                let capturedImage = self.state.capturedImage() else { return }
             
-            editPicVC.capturedImage = self.state.capturedImage()
+            editPicVC.configure(withCapturedImage: capturedImage, delegate: self)
             self.captureSession?.stopRunning()
         }
     }
@@ -162,6 +161,16 @@ class CameraViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+}
+
+extension CameraViewController : EditPageDelegate {
+    func editPageWillDismiss() {
+        if let captureSession = self.captureSession {
+            captureSession.startRunning()
+        } else {
+            self.setupCamera()
+        }
+    }
 }
 
 extension CameraViewController : AVCapturePhotoCaptureDelegate {
