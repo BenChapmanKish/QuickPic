@@ -20,3 +20,7 @@ struct UserFacingStrings {
         static let couldNotSaveImage = "We couldn't save the image to your camera roll!"
     }
 }
+
+struct UserDefaultsKeys {
+    static let lastFlashMode = "lastFlashMode"
+}

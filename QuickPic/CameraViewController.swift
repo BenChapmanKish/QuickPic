@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-enum CameraPageState {
+enum CameraPageState: Equatable {
     case livePreview
     case capturingImage
     case preparingToEdit(image: UIImage)
@@ -43,6 +43,11 @@ class CameraViewController: UIViewController {
         super.viewDidLoad()
         self.setupSwitchCameraGesture()
         self.setupCamera()
+        
+        if let lastFlashModeInt = UserDefaults.standard.value(forKey: UserDefaultsKeys.lastFlashMode) as? Int,
+            let lastFlashMode = AVCaptureDevice.FlashMode(rawValue: lastFlashModeInt) {
+            self.setFlashMode(to: lastFlashMode)
+        }
     }
     
     func setupCamera(forPosition cameraPosition: AVCaptureDevice.Position? = nil) {
@@ -113,15 +118,25 @@ class CameraViewController: UIViewController {
     func cycleFlashMode() {
         switch self.flashMode {
         case .on:
-            self.flashMode = .auto
-            self.flashIndicatorButton.setImage(#imageLiteral(resourceName: "Flash-Auto"), for: .normal)
+            self.setFlashMode(to: .auto)
         case .auto:
-            self.flashMode = .off
-            self.flashIndicatorButton.setImage(#imageLiteral(resourceName: "Flash-Off"), for: .normal)
+            self.setFlashMode(to: .off)
         case .off:
-            self.flashMode = .on
-            self.flashIndicatorButton.setImage(#imageLiteral(resourceName: "Flash-On"), for: .normal)
+            self.setFlashMode(to: .on)
         }
+    }
+    
+    func setFlashMode(to flashMode: AVCaptureDevice.FlashMode) {
+        self.flashMode = flashMode
+        switch flashMode {
+        case .on:
+            self.flashIndicatorButton.setImage(#imageLiteral(resourceName: "Flash-On"), for: .normal)
+        case .auto:
+            self.flashIndicatorButton.setImage(#imageLiteral(resourceName: "Flash-Auto"), for: .normal)
+        case .off:
+            self.flashIndicatorButton.setImage(#imageLiteral(resourceName: "Flash-Off"), for: .normal)
+        }
+        UserDefaults.standard.set(self.flashMode.rawValue, forKey: UserDefaultsKeys.lastFlashMode)
     }
     
     @IBAction func swapCameraButtonTapped(_ sender: UIButton) {
@@ -193,13 +208,10 @@ extension CameraViewController : AVCapturePhotoCaptureDelegate {
             return
         }
         
-        switch self.state {
-        case .capturingImage:
+        if self.state == .capturingImage {
             guard let imageData = photo.fileDataRepresentation(),
                 let capturedImage = UIImage.init(data: imageData) else { return }
             self.enterEditState(withImage: capturedImage)
-        default:
-            self.setupCamera(forPosition: .back)
         }
     }
 }
