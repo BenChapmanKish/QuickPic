@@ -2,6 +2,6 @@
 A proof-of-concept simple snapchat clone
 
 
-## Asset Credits
+### Asset Credits
 - Capture circle icon made by Ben Chapman-Kish
-- Letter X icon made by Lyolya from www.flaticon.com
+- Other UI elements by Google material design
