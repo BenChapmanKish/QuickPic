@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B547E466208D97A900FBF67B /* EditPicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547E465208D97A900FBF67B /* EditPicViewController.swift */; };
 		B547E468208D9EF900FBF67B /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547E467208D9EF900FBF67B /* PassthroughView.swift */; };
+		B547E46A208DA56600FBF67B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547E469208DA56600FBF67B /* Constants.swift */; };
 		B583A1B52086C8FE002C4EA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B583A1B42086C8FE002C4EA7 /* AppDelegate.swift */; };
 		B583A1BA2086C8FE002C4EA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B583A1B82086C8FE002C4EA7 /* Main.storyboard */; };
 		B583A1BC2086C8FE002C4EA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B583A1BB2086C8FE002C4EA7 /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		B547E465208D97A900FBF67B /* EditPicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPicViewController.swift; sourceTree = "<group>"; };
 		B547E467208D9EF900FBF67B /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
+		B547E469208DA56600FBF67B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B583A1B12086C8FE002C4EA7 /* QuickPic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickPic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B583A1B42086C8FE002C4EA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B583A1B92086C8FE002C4EA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */,
 				B547E465208D97A900FBF67B /* EditPicViewController.swift */,
 				B547E467208D9EF900FBF67B /* PassthroughView.swift */,
+				B547E469208DA56600FBF67B /* Constants.swift */,
 			);
 			path = QuickPic;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				B547E468208D9EF900FBF67B /* PassthroughView.swift in Sources */,
 				B583A2072086CED0002C4EA7 /* CorePageViewController.swift in Sources */,
 				B583A1B52086C8FE002C4EA7 /* AppDelegate.swift in Sources */,
+				B547E46A208DA56600FBF67B /* Constants.swift in Sources */,
 				B59BA6222086F178005B66CB /* CameraViewController.swift in Sources */,
 				B547E466208D97A900FBF67B /* EditPicViewController.swift in Sources */,
 			);

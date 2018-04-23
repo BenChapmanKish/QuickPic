@@ -12,11 +12,11 @@ import AVFoundation
 enum CameraPageState {
     case livePreview
     case capturingImage
-    case editing(capturedImage: UIImage)
+    case preparingToEdit(image: UIImage)
     
     func capturedImage() -> UIImage? {
         switch self {
-        case .editing(let image):
+        case .preparingToEdit(let image):
             return image
         default:
             return nil
@@ -61,7 +61,7 @@ class CameraViewController: UIViewController {
         do {
             input = try AVCaptureDeviceInput(device: captureDevice)
         } catch {
-            self.showAlertWithOkButton(message: error.localizedDescription)
+            self.showGenericErrorAlert(withMessage: error.localizedDescription)
             return
         }
         
@@ -109,7 +109,7 @@ class CameraViewController: UIViewController {
         switch self.state {
         case .livePreview:
             self.captureImage()
-        case .editing:
+        case .preparingToEdit:
             self.setupCamera(forPosition: .back)
         default:
             break
@@ -136,13 +136,13 @@ class CameraViewController: UIViewController {
             correctedImage = UIImage(cgImage: cgimage, scale: image.scale, orientation: .leftMirrored)
         }
         
-        self.state = .editing(capturedImage: correctedImage)
+        self.state = .preparingToEdit(image: correctedImage)
         
-        self.performSegue(withIdentifier: "showEditPicVC", sender: nil)
+        self.performSegue(withIdentifier: Ids.Segues.showEditPicVC, sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showEditPicVC" {
+        if segue.identifier == Ids.Segues.showEditPicVC {
             guard let editPicVC = segue.destination as? EditPicViewController,
                 let capturedImage = self.state.capturedImage() else { return }
             
@@ -150,17 +150,6 @@ class CameraViewController: UIViewController {
             self.captureSession?.stopRunning()
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
 
 extension CameraViewController : EditPageDelegate {
@@ -176,7 +165,7 @@ extension CameraViewController : EditPageDelegate {
 extension CameraViewController : AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         if let error = error {
-            self.showAlertWithOkButton(title: "An error happened", message: error.localizedDescription)
+            self.showGenericErrorAlert(withMessage: error.localizedDescription)
             return
         }
         

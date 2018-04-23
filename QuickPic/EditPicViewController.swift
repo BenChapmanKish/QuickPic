@@ -26,7 +26,7 @@ class EditPicViewController: UIViewController {
         self.capturedImageView.image = self.capturedImage
     }
     
-    func configure(withCapturedImage image: UIImage, delegate: EditPageDelegate) {
+    func configure(withCapturedImage image: UIImage, delegate: EditPageDelegate? = nil) {
         self.capturedImage = image
         self.delegate = delegate
     }

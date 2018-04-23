@@ -9,12 +9,16 @@
 import UIKit
 
 extension UIViewController {
-    func showAlertWithOkButton(title: String = "Oh no!", message: String? = nil, okAction: (() -> Void)? = nil ) {
+    func showAlertWithOkButton(title: String? = nil, message: String? = nil, okAction: (() -> Void)? = nil ) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default) { _ in
             okAction?()
         }
         alert.addAction(alertAction)
         self.present(alert, animated: true)
+    }
+    
+    func showGenericErrorAlert(withMessage message: String? = nil) {
+        self.showAlertWithOkButton(title: UserFacingStrings.Errors.genericErrorTitle, message: message)
     }
 }
