@@ -73,6 +73,8 @@ class EditPicViewController: UIViewController {
         self.timePickerView.dataSource = self
         self.timePickerView.delegate = self
         self.timePickerContainer.isHidden = true
+        
+        self.picDisplayTime = UserDefaults.standard.value(forKey: UserDefaultsKeys.lastDisplayTime) as? Int ?? Constants.PicDisplay.defaultDisplayTime
     }
     
     public func drawEditsOnCapturedImage() -> UIImage? {
@@ -152,11 +154,17 @@ class EditPicViewController: UIViewController {
     }
     
     @IBAction func timerButtonTapped(_ sender: QPButton) {
+        if let row = Constants.PicDisplay.possibleDisplayValues.index(of: self.picDisplayTime) {
+            self.timePickerView.selectRow(row, inComponent: 0, animated: false)
+        }
+        
         self.timePickerContainer.isHidden = false
     }
     
     @IBAction func pickerViewDoneTapped(_ sender: UIButton) {
         self.timePickerContainer.isHidden = true
+        
+        UserDefaults.standard.set(self.picDisplayTime, forKey: UserDefaultsKeys.lastDisplayTime)
     }
     
     

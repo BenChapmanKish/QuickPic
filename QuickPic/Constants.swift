@@ -30,6 +30,7 @@ struct UserFacingStrings {
 }
 struct UserDefaultsKeys {
     static let lastFlashMode = "lastFlashMode"
+    static let lastDisplayTime = "lastDisplayTime"
 }
 
 struct Constants {
