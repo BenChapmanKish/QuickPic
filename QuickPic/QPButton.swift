@@ -32,9 +32,20 @@ class QPButton: UIButton {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         self.normalImage = self.image(for: .normal)
-        
+        self.setupShadow()
+        self.setupEnlargeOnHighlighted()
+    }
+    
+    private func setupShadow() {
+        self.layer.masksToBounds = false
+        self.layer.shadowRadius = 3.0
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowOffset = .zero
+    }
+    
+    private func setupEnlargeOnHighlighted() {
         // Grab an existing width constraint, or create one if needed
         if let widthConstraint = self.constraints.first(where: {
             return $0.firstItem as? QPButton == self
