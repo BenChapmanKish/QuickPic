@@ -224,6 +224,9 @@
                                             <constraint firstAttribute="width" constant="30" id="aPr-dv-EpH"/>
                                         </constraints>
                                         <state key="normal" image="Timer"/>
+                                        <connections>
+                                            <action selector="timerButtonTapped:" destination="5oi-Hh-Sqq" eventType="touchUpInside" id="qGf-c1-LSL"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F52-Fn-xDx" customClass="QPButton" customModule="QuickPic" customModuleProvider="target">
                                         <rect key="frame" x="330" y="602" width="30" height="30"/>
@@ -232,6 +235,9 @@
                                             <constraint firstAttribute="width" constant="30" id="peR-4q-xPX"/>
                                         </constraints>
                                         <state key="normal" image="Continue"/>
+                                        <connections>
+                                            <action selector="nextButtonTapped:" destination="5oi-Hh-Sqq" eventType="touchUpInside" id="WJK-Rk-EuK"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -248,14 +254,47 @@
                                     <constraint firstItem="8vZ-g8-kHR" firstAttribute="centerY" secondItem="5hy-Kn-KtY" secondAttribute="top" constant="30" id="x3L-GD-GAi"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M75-xv-hRb">
+                                <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                                <subviews>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bGU-B4-PuC">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </pickerView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vh-oa-XSo">
+                                        <rect key="frame" x="319" y="11" width="42" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="2LF-Fy-IhQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <state key="normal" title="Done"/>
+                                        <connections>
+                                            <action selector="pickerViewDoneTapped:" destination="5oi-Hh-Sqq" eventType="touchUpInside" id="nH9-Gy-RrD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="2Vh-oa-XSo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="M75-xv-hRb" secondAttribute="leading" constant="20" symbolic="YES" id="3XB-2U-zxL"/>
+                                    <constraint firstItem="bGU-B4-PuC" firstAttribute="leading" secondItem="M75-xv-hRb" secondAttribute="leading" id="4cf-Dm-IzP"/>
+                                    <constraint firstItem="bGU-B4-PuC" firstAttribute="top" secondItem="M75-xv-hRb" secondAttribute="top" id="Icz-u6-aBO"/>
+                                    <constraint firstAttribute="trailing" secondItem="bGU-B4-PuC" secondAttribute="trailing" id="NJA-3a-8Vx"/>
+                                    <constraint firstAttribute="bottom" secondItem="bGU-B4-PuC" secondAttribute="bottom" id="gcA-B3-Gea"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Vh-oa-XSo" secondAttribute="trailing" constant="14" id="iyA-EO-pBF"/>
+                                    <constraint firstItem="2Vh-oa-XSo" firstAttribute="top" secondItem="M75-xv-hRb" secondAttribute="top" constant="11" id="tXv-zl-z2S"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="MmK-G3-Ief" firstAttribute="bottom" secondItem="LSs-fr-doM" secondAttribute="bottom" id="3j3-X1-sCA"/>
+                            <constraint firstItem="9Cz-tR-ygG" firstAttribute="trailing" secondItem="M75-xv-hRb" secondAttribute="trailing" id="84Z-bU-P0E"/>
                             <constraint firstItem="5hy-Kn-KtY" firstAttribute="leading" secondItem="9Cz-tR-ygG" secondAttribute="leading" id="8rM-DX-TtP"/>
                             <constraint firstItem="9Cz-tR-ygG" firstAttribute="bottom" secondItem="5hy-Kn-KtY" secondAttribute="bottom" id="NYZ-Kr-Ddr"/>
+                            <constraint firstItem="M75-xv-hRb" firstAttribute="leading" secondItem="9Cz-tR-ygG" secondAttribute="leading" id="OEV-gW-e0z"/>
                             <constraint firstItem="5hy-Kn-KtY" firstAttribute="top" secondItem="9Cz-tR-ygG" secondAttribute="top" id="QCb-5o-JcN"/>
                             <constraint firstItem="mWO-s6-niy" firstAttribute="top" secondItem="9Cz-tR-ygG" secondAttribute="top" constant="300" id="Sah-Tg-4QN"/>
+                            <constraint firstItem="9Cz-tR-ygG" firstAttribute="bottom" secondItem="M75-xv-hRb" secondAttribute="bottom" id="UYe-Uy-ycz"/>
                             <constraint firstItem="MmK-G3-Ief" firstAttribute="top" secondItem="LSs-fr-doM" secondAttribute="top" id="bi8-A4-YaI"/>
                             <constraint firstItem="UdH-c1-41f" firstAttribute="top" secondItem="LSs-fr-doM" secondAttribute="top" id="emE-qV-qKL"/>
                             <constraint firstItem="UdH-c1-41f" firstAttribute="bottom" secondItem="LSs-fr-doM" secondAttribute="bottom" id="gWO-Ln-C7s"/>
@@ -275,12 +314,14 @@
                         <outlet property="textBarContainer" destination="mWO-s6-niy" id="A0S-XO-qqQ"/>
                         <outlet property="textBarTextView" destination="XOi-ys-goZ" id="qZo-Gs-xkr"/>
                         <outlet property="textBarTopConstraint" destination="Sah-Tg-4QN" id="AqJ-hw-CLE"/>
+                        <outlet property="timePickerContainer" destination="M75-xv-hRb" id="TOX-WO-M7M"/>
+                        <outlet property="timePickerView" destination="bGU-B4-PuC" id="K0b-jx-1U7"/>
                         <outlet property="uiOverlayView" destination="5hy-Kn-KtY" id="1xv-EQ-dZP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TYn-MN-EUk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="683" y="1599"/>
+            <point key="canvasLocation" x="682.39999999999998" y="1598.9505247376312"/>
         </scene>
     </scenes>
     <resources>

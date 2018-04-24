@@ -22,6 +22,9 @@ class EditPicViewController: UIViewController {
     
     @IBOutlet var saveButton: QPButton!
     
+    @IBOutlet var timePickerContainer: UIView!
+    @IBOutlet var timePickerView: UIPickerView!
+    
     @IBOutlet var textBarTopConstraint: NSLayoutConstraint!
     @IBOutlet var textBarBottomConstraint: NSLayoutConstraint!
     
@@ -29,6 +32,9 @@ class EditPicViewController: UIViewController {
     @IBOutlet var textBarTextView: UITextView!
     
     private var capturedImage: UIImage?
+    private var picDisplayTime: Int = 10
+    private let possiblePicDisplayValues: [Int] = Array(1 ... 10)
+    
     private var delegate: EditPageDelegate?
     private var textBarInitialPositionForGesture: CGFloat = 0.0
     private var textBarPosition: CGFloat = 0.0
@@ -37,6 +43,7 @@ class EditPicViewController: UIViewController {
         super.viewDidLoad()
         self.capturedImageView.image = self.capturedImage
         self.setupTextBar()
+        self.setupPickerView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(notification:)), name:NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
@@ -61,6 +68,12 @@ class EditPicViewController: UIViewController {
         panGR.delegate = self
         panGR.maximumNumberOfTouches = 1
         self.textBarContainer.addGestureRecognizer(panGR)
+    }
+    
+    private func setupPickerView() {
+        self.timePickerView.dataSource = self
+        self.timePickerView.delegate = self
+        self.timePickerContainer.isHidden = true
     }
     
     public func drawEditsOnCapturedImage() -> UIImage? {
@@ -139,10 +152,22 @@ class EditPicViewController: UIViewController {
         self.textBarTopConstraint.constant = self.textBarPosition
     }
     
+    @IBAction func timerButtonTapped(_ sender: QPButton) {
+        self.timePickerContainer.isHidden = false
+    }
+    
+    @IBAction func pickerViewDoneTapped(_ sender: UIButton) {
+        self.timePickerContainer.isHidden = true
+    }
+    
     
     @IBAction func exitButtonTapped(_ sender: QPButton) {
         self.delegate?.editPageWillDismiss()
         self.dismiss(animated: false, completion: nil)
+    }
+    
+    @IBAction func nextButtonTapped(_ sender: QPButton) {
+        // TODO: Implement
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -204,5 +229,29 @@ extension EditPicViewController : UITextViewDelegate {
             return false
         }
         return true
+    }
+}
+
+extension EditPicViewController : UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.possiblePicDisplayValues.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        guard row >= 0 && row < self.possiblePicDisplayValues.count else { return nil }
+        
+        if (row == 0) {
+            return "1 second"
+        } else {
+            return "\(self.possiblePicDisplayValues[row]) seconds"
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.picDisplayTime = self.possiblePicDisplayValues[row]
     }
 }
