@@ -248,14 +248,22 @@ extension EditPicViewController : UIPickerViewDelegate, UIPickerViewDataSource {
         return Constants.PicDisplay.possibleDisplayValues.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        guard row >= 0 && row < Constants.PicDisplay.possibleDisplayValues.count else { return nil }
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        guard row >= 0 && row < Constants.PicDisplay.possibleDisplayValues.count else { return UIView() }
         
-        if (row == 0) {
-            return "1 second"
-        } else {
-            return "\(Constants.PicDisplay.possibleDisplayValues[row]) seconds"
-        }
+        let pickerLabel = UILabel()
+        pickerLabel.textColor = UIColor.black
+        pickerLabel.textAlignment = NSTextAlignment.center
+        
+        let pickerTitle = NSMutableAttributedString(string: String(Constants.PicDisplay.possibleDisplayValues[row]), attributes: [.font: UIFont.systemFont(ofSize: Constants.PicDisplay.pickerFontSize, weight: .semibold)])
+        
+        let secondStr = row > 0 ? " seconds" : " second"
+        
+        pickerTitle.append(NSAttributedString(string: secondStr, attributes: [.font: UIFont.systemFont(ofSize: Constants.PicDisplay.pickerFontSize, weight: .regular)]))
+        
+        pickerLabel.attributedText = pickerTitle
+        
+        return pickerLabel
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

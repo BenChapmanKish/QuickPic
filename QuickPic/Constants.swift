@@ -38,6 +38,7 @@ struct Constants {
     struct PicDisplay {
         static let possibleDisplayValues: [Int] = Array(1 ... 10)
         static let defaultDisplayTime: Int = 10
+        static let pickerFontSize: CGFloat = 22.0
     }
     
     struct QPButton {
