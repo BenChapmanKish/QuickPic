@@ -27,13 +27,22 @@ class EditPicViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.capturedImageView.image = self.capturedImage
-        self.textBarContainer.isHidden = true
-        self.textBarTextView.delegate = self
+        self.setupTextBar()
     }
     
     func configure(withCapturedImage image: UIImage, delegate: EditPageDelegate? = nil) {
         self.capturedImage = image
         self.delegate = delegate
+    }
+    
+    private func setupTextBar() {
+        self.textBarContainer.isHidden = true
+        self.textBarTextView.delegate = self
+        
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(EditPicViewController.handleSingleTap(_:)))
+        tapGR.delegate = self
+        // Add gesture to edits overlay view since ui overlay view passes through taps
+        self.editsOverlayView.addGestureRecognizer(tapGR)
     }
     
     func drawEditsOnCapturedImage() -> UIImage? {
@@ -66,20 +75,21 @@ class EditPicViewController: UIViewController {
     }
     
     @IBAction func addTextButtonTapped(_ sender: UIButton) {
-        self.showTextBarIfHidden()
-    }
-    
-    private func showTextBarIfHidden() {
         if self.textBarContainer.isHidden {
-            self.textBarContainer.isHidden = false
-            self.textBarTextView.becomeFirstResponder()
+            self.showTextBar()
         }
     }
     
-    private func hideTextBarIfNeeded() {
+    private func showTextBar() {
+        self.textBarContainer.isHidden = false
+        self.textBarTextView.becomeFirstResponder()
+    }
+    
+    private func dismissTextBarAndHideIfEmpty() {
         if self.textBarTextView.text.isEmpty {
             self.textBarContainer.isHidden = true
         }
+        self.textBarTextView.resignFirstResponder()
     }
     
     @IBAction func exitButtonTapped(_ sender: UIButton) {
@@ -92,12 +102,21 @@ class EditPicViewController: UIViewController {
     }
 }
 
+extension EditPicViewController : UIGestureRecognizerDelegate {
+    @objc func handleSingleTap(_ gesture: UITapGestureRecognizer){
+        if self.textBarContainer.isHidden {
+            self.showTextBar()
+        } else {
+            self.dismissTextBarAndHideIfEmpty()
+        }
+    }
+}
+
 extension EditPicViewController : UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if textView == self.textBarTextView,
             text == "\n" {
-            self.hideTextBarIfNeeded()
-            textView.resignFirstResponder()
+            self.dismissTextBarAndHideIfEmpty()
             return false
         }
         return true
