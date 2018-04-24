@@ -18,12 +18,17 @@ class EditPicViewController: UIViewController {
     @IBOutlet var editsOverlayView: UIView!
     @IBOutlet var uiOverlayView: UIView!
     
+    @IBOutlet var textBarContainer: UIView!
+    @IBOutlet var textBarTextView: UITextView!
+    
     var capturedImage: UIImage?
     var delegate: EditPageDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.capturedImageView.image = self.capturedImage
+        self.textBarContainer.isHidden = true
+        self.textBarTextView.delegate = self
     }
     
     func configure(withCapturedImage image: UIImage, delegate: EditPageDelegate? = nil) {
@@ -59,9 +64,42 @@ class EditPicViewController: UIViewController {
         }
         UIImageWriteToSavedPhotosAlbum(editedImage, nil, nil, nil)
     }
-
+    
+    @IBAction func addTextButtonTapped(_ sender: UIButton) {
+        self.showTextBarIfHidden()
+    }
+    
+    private func showTextBarIfHidden() {
+        if self.textBarContainer.isHidden {
+            self.textBarContainer.isHidden = false
+            self.textBarTextView.becomeFirstResponder()
+        }
+    }
+    
+    private func hideTextBarIfNeeded() {
+        if self.textBarTextView.text.isEmpty {
+            self.textBarContainer.isHidden = true
+        }
+    }
+    
     @IBAction func exitButtonTapped(_ sender: UIButton) {
         self.delegate?.editPageWillDismiss()
         self.dismiss(animated: false, completion: nil)
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+}
+
+extension EditPicViewController : UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if textView == self.textBarTextView,
+            text == "\n" {
+            self.hideTextBarIfNeeded()
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
     }
 }

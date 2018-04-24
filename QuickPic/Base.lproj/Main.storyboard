@@ -149,19 +149,31 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MmK-G3-Ief">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Eq-hd-fJ3">
-                                        <rect key="frame" x="0.0" y="273.5" width="320" height="21"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="0.80345676369863017" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mWO-s6-niy">
+                                        <rect key="frame" x="0.0" y="200" width="320" height="47.5"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XOi-ys-goZ">
+                                                <rect key="frame" x="5" y="5" width="310" height="37.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80297517123287676" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="XOi-ys-goZ" secondAttribute="bottom" constant="5" id="Flp-mo-ab8"/>
+                                            <constraint firstItem="XOi-ys-goZ" firstAttribute="top" secondItem="mWO-s6-niy" secondAttribute="top" constant="5" id="fi6-cc-mo2"/>
+                                            <constraint firstAttribute="trailing" secondItem="XOi-ys-goZ" secondAttribute="trailing" constant="5" id="irV-q4-KNw"/>
+                                            <constraint firstItem="XOi-ys-goZ" firstAttribute="leading" secondItem="mWO-s6-niy" secondAttribute="leading" constant="5" id="rJr-zR-g65"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="1Eq-hd-fJ3" firstAttribute="leading" secondItem="MmK-G3-Ief" secondAttribute="leading" id="6UM-eV-kZe"/>
-                                    <constraint firstAttribute="trailing" secondItem="1Eq-hd-fJ3" secondAttribute="trailing" id="eKe-V7-eBs"/>
-                                    <constraint firstItem="1Eq-hd-fJ3" firstAttribute="centerY" secondItem="MmK-G3-Ief" secondAttribute="centerY" id="v7U-uD-1IU"/>
+                                    <constraint firstItem="mWO-s6-niy" firstAttribute="leading" secondItem="MmK-G3-Ief" secondAttribute="leading" id="A1U-UD-cTh"/>
+                                    <constraint firstAttribute="trailing" secondItem="mWO-s6-niy" secondAttribute="trailing" id="VzX-OK-RW2"/>
+                                    <constraint firstItem="mWO-s6-niy" firstAttribute="top" secondItem="MmK-G3-Ief" secondAttribute="top" constant="200" id="gwe-GG-CrX"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5hy-Kn-KtY" customClass="PassthroughView" customModule="QuickPic" customModuleProvider="target">
@@ -189,12 +201,25 @@
                                             <action selector="saveButtonTapped:" destination="5oi-Hh-Sqq" eventType="touchUpInside" id="t9g-uf-0YI"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="big-y1-nrs">
+                                        <rect key="frame" x="275" y="15" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="TMH-ZO-dVy"/>
+                                            <constraint firstAttribute="width" secondItem="big-y1-nrs" secondAttribute="height" multiplier="1:1" id="vu3-Zx-sR5"/>
+                                        </constraints>
+                                        <state key="normal" image="Add-Text"/>
+                                        <connections>
+                                            <action selector="addTextButtonTapped:" destination="5oi-Hh-Sqq" eventType="touchUpInside" id="cXg-St-OLi"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="big-y1-nrs" firstAttribute="centerY" secondItem="5hy-Kn-KtY" secondAttribute="top" constant="30" id="9qF-yd-bk4"/>
                                     <constraint firstAttribute="bottom" secondItem="nWI-eG-oZ8" secondAttribute="centerY" constant="30" id="C6C-oD-lqx"/>
                                     <constraint firstItem="8vZ-g8-kHR" firstAttribute="centerX" secondItem="5hy-Kn-KtY" secondAttribute="leading" constant="30" id="b0F-Yb-Z95"/>
                                     <constraint firstItem="nWI-eG-oZ8" firstAttribute="centerX" secondItem="5hy-Kn-KtY" secondAttribute="leading" constant="30" id="hIe-Hh-JGf"/>
+                                    <constraint firstAttribute="trailing" secondItem="big-y1-nrs" secondAttribute="centerX" constant="30" id="utC-J4-5c0"/>
                                     <constraint firstItem="8vZ-g8-kHR" firstAttribute="centerY" secondItem="5hy-Kn-KtY" secondAttribute="top" constant="30" id="x3L-GD-GAi"/>
                                 </constraints>
                             </view>
@@ -219,6 +244,8 @@
                     <connections>
                         <outlet property="capturedImageView" destination="UdH-c1-41f" id="ePn-66-led"/>
                         <outlet property="editsOverlayView" destination="MmK-G3-Ief" id="ssu-cV-DvK"/>
+                        <outlet property="textBarContainer" destination="mWO-s6-niy" id="A0S-XO-qqQ"/>
+                        <outlet property="textBarTextView" destination="XOi-ys-goZ" id="qZo-Gs-xkr"/>
                         <outlet property="uiOverlayView" destination="5hy-Kn-KtY" id="1xv-EQ-dZP"/>
                     </connections>
                 </viewController>
@@ -228,6 +255,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Add-Text" width="256" height="256"/>
         <image name="Capture" width="240" height="240"/>
         <image name="Exit" width="256" height="256"/>
         <image name="Flash-Auto" width="256" height="256"/>
