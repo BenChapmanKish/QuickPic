@@ -10,6 +10,8 @@ import UIKit
 
 // TODO: Refactor this class so we don't have to grab/create constraints like this (so ugly)
 
+fileprivate let minimumHitArea = CGSize(width: 50, height: 50)
+
 class QPButton: UIButton {
     
     private var widthConstraint: NSLayoutConstraint!
@@ -102,5 +104,15 @@ class QPButton: UIButton {
         self.layer.removeAllAnimations()
         self.setImage(normalImage, for: .normal)
         self.isUserInteractionEnabled = true
+    }
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        guard !self.isHidden, self.isUserInteractionEnabled, self.alpha > 0 else { return nil }
+        
+        let extraWidth = max(0, minimumHitArea.width - self.bounds.size.width)
+        let extraHeight = max(0, minimumHitArea.height - self.bounds.size.height)
+        let largerFrame = self.bounds.insetBy(dx: -extraWidth / 2, dy: -extraHeight / 2)
+        
+        return largerFrame.contains(point) ? self : nil
     }
 }
