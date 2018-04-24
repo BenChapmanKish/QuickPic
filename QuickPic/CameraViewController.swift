@@ -111,7 +111,7 @@ class CameraViewController: UIViewController {
         }
     }
     
-    @IBAction func flashButtonTapped(_ sender: UIButton) {
+    @IBAction func flashButtonTapped(_ sender: QPButton) {
         self.cycleFlashMode()
     }
     
@@ -139,11 +139,11 @@ class CameraViewController: UIViewController {
         UserDefaults.standard.set(self.flashMode.rawValue, forKey: UserDefaultsKeys.lastFlashMode)
     }
     
-    @IBAction func swapCameraButtonTapped(_ sender: UIButton) {
+    @IBAction func swapCameraButtonTapped(_ sender: QPButton) {
         self.switchCameras()
     }
     
-    @IBAction func captureButtonTapped(_ sender: Any) {
+    @IBAction func captureButtonTapped(_ sender: QPButton) {
         switch self.state {
         case .livePreview:
             self.captureImage()

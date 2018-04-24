@@ -31,7 +31,6 @@ class EditPicViewController: UIViewController {
     private var capturedImage: UIImage?
     private var delegate: EditPageDelegate?
     private var textBarInitialPositionForGesture: CGFloat = 0.0
-    // Using explicit setter for expressiveness
     private var textBarPosition: CGFloat = 0.0
     
     override func viewDidLoad() {
@@ -81,7 +80,7 @@ class EditPicViewController: UIViewController {
         return editedImage
     }
     
-    @IBAction func saveButtonTapped(_ sender: UIButton) {
+    @IBAction func saveButtonTapped(_ sender: QPButton) {
         self.saveImageToCameraRoll()
     }
     
@@ -102,12 +101,14 @@ class EditPicViewController: UIViewController {
         self.saveButton.endSpinner()
     }
     
-    @IBAction func addTextButtonTapped(_ sender: UIButton) {
+    @IBAction func addTextButtonTapped(_ sender: QPButton) {
         if self.textBarContainer.isHidden {
             self.showTextBar()
-        } else {
+        } else if !self.textBarTextView.isFirstResponder {
             self.textBarTextView.selectedRange = NSMakeRange(self.textBarTextView.text.count, 0)
             self.textBarTextView.becomeFirstResponder()
+        } else {
+            self.stopEditingTextBarAndHideIfEmpty()
         }
     }
     
@@ -124,13 +125,14 @@ class EditPicViewController: UIViewController {
         self.textBarTextView.becomeFirstResponder()
     }
     
-    public func dismissTextBarAndHideIfEmpty() {
+    public func stopEditingTextBarAndHideIfEmpty() {
         self.textBarTextView.resignFirstResponder()
         if self.textBarTextView.text.count == 0 {
             self.textBarContainer.isHidden = true
         }
     }
     
+    // Using explicit setter for expressiveness
     /// Constrains the text bar so that it will remain fully visible on-screen
     public func setTextBarPosition(to newPosition: CGFloat) {
         self.textBarPosition = min(max(0, newPosition), self.editsOverlayView.frame.height - self.textBarContainer.frame.height)
@@ -138,7 +140,7 @@ class EditPicViewController: UIViewController {
     }
     
     
-    @IBAction func exitButtonTapped(_ sender: UIButton) {
+    @IBAction func exitButtonTapped(_ sender: QPButton) {
         self.delegate?.editPageWillDismiss()
         self.dismiss(animated: false, completion: nil)
     }
@@ -171,7 +173,7 @@ extension EditPicViewController : UIGestureRecognizerDelegate {
             // Add the text bar at the same vertical location that was tapped
             self.showTextBar(atHeight: gesture.location(in: self.editsOverlayView).y)
         } else {
-            self.dismissTextBarAndHideIfEmpty()
+            self.stopEditingTextBarAndHideIfEmpty()
         }
     }
     
@@ -198,7 +200,7 @@ extension EditPicViewController : UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if textView == self.textBarTextView,
             text == "\n" {
-            self.dismissTextBarAndHideIfEmpty()
+            self.stopEditingTextBarAndHideIfEmpty()
             return false
         }
         return true
