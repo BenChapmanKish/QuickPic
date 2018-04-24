@@ -35,9 +35,9 @@ class EditPicViewController: UIViewController {
         self.capturedImageView.image = self.capturedImage
         self.setupTextBar()
         
-        /*NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(notification:)), name:NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(notification:)), name:NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)*/
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     public func configure(withCapturedImage image: UIImage, delegate: EditPageDelegate? = nil) {
@@ -137,18 +137,22 @@ class EditPicViewController: UIViewController {
         return true
     }
     
-    /*@objc func keyboardWillChangeFrame(notification: NSNotification) {
+    
+    @objc func keyboardWillChangeFrame(notification: NSNotification) {
         guard let userInfo = notification.userInfo,
             let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
                 return
         }
         
-        self.editsOverlayBottomConstraint.constant = keyboardFrame.height
+        self.textBarTopConstraint.isActive = false
+        self.textBarBottomConstraint.isActive = true
+        self.textBarBottomConstraint.constant = self.view.safeAreaInsets.bottom + keyboardFrame.height
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        self.editsOverlayBottomConstraint.constant = 0
-    }*/
+        self.textBarBottomConstraint.isActive = false
+        self.textBarTopConstraint.isActive = true
+    }
 }
 
 extension EditPicViewController : UIGestureRecognizerDelegate {
