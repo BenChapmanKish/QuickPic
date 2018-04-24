@@ -29,14 +29,14 @@ class CameraViewController: UIViewController {
     @IBOutlet var uiOverlayView: UIView!
     @IBOutlet var flashIndicatorButton: QPButton!
     
-    var captureSession: AVCaptureSession?
-    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
-    var capturePhotoOutput: AVCapturePhotoOutput?
+    private var captureSession: AVCaptureSession?
+    private var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+    private var capturePhotoOutput: AVCapturePhotoOutput?
     
     
-    var state: CameraPageState = .livePreview
-    var flashMode: AVCaptureDevice.FlashMode = .auto
-    var cameraPosition: AVCaptureDevice.Position = .back
+    private var state: CameraPageState = .livePreview
+    private var flashMode: AVCaptureDevice.FlashMode = .auto
+    private var cameraPosition: AVCaptureDevice.Position = .back
     
     
     override func viewDidLoad() {
@@ -50,7 +50,7 @@ class CameraViewController: UIViewController {
         }
     }
     
-    func setupCamera(forPosition cameraPosition: AVCaptureDevice.Position? = nil) {
+    private func setupCamera(forPosition cameraPosition: AVCaptureDevice.Position? = nil) {
         let position = cameraPosition ?? self.cameraPosition
         
         guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: position) else { return }
@@ -103,7 +103,7 @@ class CameraViewController: UIViewController {
         self.uiOverlayView.addGestureRecognizer(tapGR)
     }
     
-    private func switchCameras() {
+    public func switchCameras() {
         if self.cameraPosition == .back {
             self.setupCamera(forPosition: .front)
         } else {
@@ -115,7 +115,7 @@ class CameraViewController: UIViewController {
         self.cycleFlashMode()
     }
     
-    func cycleFlashMode() {
+    public func cycleFlashMode() {
         switch self.flashMode {
         case .on:
             self.setFlashMode(to: .auto)
@@ -126,7 +126,7 @@ class CameraViewController: UIViewController {
         }
     }
     
-    func setFlashMode(to flashMode: AVCaptureDevice.FlashMode) {
+    public func setFlashMode(to flashMode: AVCaptureDevice.FlashMode) {
         self.flashMode = flashMode
         switch flashMode {
         case .on:
@@ -154,7 +154,7 @@ class CameraViewController: UIViewController {
         }
     }
     
-    func captureImage() {
+    public func captureImage() {
         guard let capturePhotoOutput = self.capturePhotoOutput else { return }
         
         self.state = .capturingImage
@@ -165,7 +165,7 @@ class CameraViewController: UIViewController {
         capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)
     }
     
-    func enterEditState(withImage image: UIImage) {
+    private func enterEditState(withImage image: UIImage) {
         var correctedImage: UIImage = image
         
         // If front-facing camera, flip the image horizontally

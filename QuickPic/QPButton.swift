@@ -12,13 +12,13 @@ import UIKit
 
 class QPButton: UIButton {
     
-    var widthConstraint: NSLayoutConstraint!
-    var normalImage: UIImage?
+    private var widthConstraint: NSLayoutConstraint!
+    private var normalImage: UIImage?
     
-    var normalSize: CGFloat = 30.0
-    var highlightedSizeIncrease: CGFloat = 10.0
+    private var normalSize: CGFloat = 30.0
+    private var highlightedSizeIncrease: CGFloat = 10.0
     
-    static var spinAnimation: CABasicAnimation = {
+    private static var spinAnimation: CABasicAnimation = {
         let animation = CABasicAnimation(keyPath: "transform.rotation")
         
         animation.fromValue = 0.0

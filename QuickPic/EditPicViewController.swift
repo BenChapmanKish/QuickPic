@@ -12,6 +12,8 @@ protocol EditPageDelegate {
     func editPageWillDismiss()
 }
 
+// TODO: Organize methods
+
 class EditPicViewController: UIViewController {
 
     @IBOutlet var capturedImageView: UIImageView!
@@ -29,8 +31,8 @@ class EditPicViewController: UIViewController {
     private var capturedImage: UIImage?
     private var delegate: EditPageDelegate?
     private var textBarInitialPositionForGesture: CGFloat = 0.0
-    // Not using getters and setters for expressiveness
-    private var _textBarPosition: CGFloat = 0.0
+    // Using explicit setter for expressiveness
+    private var textBarPosition: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +64,7 @@ class EditPicViewController: UIViewController {
         self.textBarContainer.addGestureRecognizer(panGR)
     }
     
-    private func drawEditsOnCapturedImage() -> UIImage? {
+    public func drawEditsOnCapturedImage() -> UIImage? {
         guard let capturedImage = self.capturedImage else { return nil }
         
         let layer = self.editsOverlayView.layer
@@ -83,7 +85,7 @@ class EditPicViewController: UIViewController {
         self.saveImageToCameraRoll()
     }
     
-    private func saveImageToCameraRoll() {
+    public func saveImageToCameraRoll() {
         guard let editedImage = self.drawEditsOnCapturedImage() else {
             self.showGenericErrorAlert(withMessage: UserFacingStrings.Errors.couldNotSaveImage)
             return
@@ -115,14 +117,14 @@ class EditPicViewController: UIViewController {
         - height: The distance that should separate the top of the screen from the top of the text bar.
           If none provided, it will show in the middle of the screen.
      */
-    private func showTextBar(atHeight height: CGFloat? = nil) {
+    public func showTextBar(atHeight height: CGFloat? = nil) {
         let barHeight = height ?? (self.view.frame.height / 2 - self.textBarContainer.frame.height / 2)
         self.setTextBarPosition(to: barHeight)
         self.textBarContainer.isHidden = false
         self.textBarTextView.becomeFirstResponder()
     }
     
-    private func dismissTextBarAndHideIfEmpty() {
+    public func dismissTextBarAndHideIfEmpty() {
         self.textBarTextView.resignFirstResponder()
         if self.textBarTextView.text.count == 0 {
             self.textBarContainer.isHidden = true
@@ -130,14 +132,11 @@ class EditPicViewController: UIViewController {
     }
     
     /// Constrains the text bar so that it will remain fully visible on-screen
-    private func setTextBarPosition(to newPosition: CGFloat) {
-        self._textBarPosition = min(max(0, newPosition), self.editsOverlayView.frame.height - self.textBarContainer.frame.height)
-        self.textBarTopConstraint.constant = self._textBarPosition
+    public func setTextBarPosition(to newPosition: CGFloat) {
+        self.textBarPosition = min(max(0, newPosition), self.editsOverlayView.frame.height - self.textBarContainer.frame.height)
+        self.textBarTopConstraint.constant = self.textBarPosition
     }
     
-    private func getTextBarPosition() -> CGFloat {
-        return self._textBarPosition
-    }
     
     @IBAction func exitButtonTapped(_ sender: UIButton) {
         self.delegate?.editPageWillDismiss()
@@ -185,7 +184,7 @@ extension EditPicViewController : UIGestureRecognizerDelegate {
         
         switch gesture.state {
         case .began:
-            self.textBarInitialPositionForGesture = self.getTextBarPosition()
+            self.textBarInitialPositionForGesture = self.textBarPosition
         case .changed:
             // Track changes for this continuous gesture
             self.setTextBarPosition(to: self.textBarInitialPositionForGesture + translation)
