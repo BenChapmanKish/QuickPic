@@ -93,6 +93,7 @@ class EditPicViewController: UIViewController {
         if self.textBarContainer.isHidden {
             self.showTextBar()
         } else {
+            self.textBarTextView.selectedRange = NSMakeRange(self.textBarTextView.text.count, 0)
             self.textBarTextView.becomeFirstResponder()
         }
     }
