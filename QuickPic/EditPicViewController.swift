@@ -18,6 +18,8 @@ class EditPicViewController: UIViewController {
     @IBOutlet var editsOverlayView: UIView!
     @IBOutlet var uiOverlayView: UIView!
     
+    @IBOutlet var saveButton: QPButton!
+    
     @IBOutlet var textBarTopConstraint: NSLayoutConstraint!
     @IBOutlet var textBarBottomConstraint: NSLayoutConstraint!
     
@@ -86,7 +88,16 @@ class EditPicViewController: UIViewController {
             self.showGenericErrorAlert(withMessage: UserFacingStrings.Errors.couldNotSaveImage)
             return
         }
-        UIImageWriteToSavedPhotosAlbum(editedImage, nil, nil, nil)
+        self.saveButton.becomeSpinner()
+        UIImageWriteToSavedPhotosAlbum(editedImage, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            self.showGenericErrorAlert(withMessage: error.localizedDescription)
+        }
+        
+        self.saveButton.endSpinner()
     }
     
     @IBAction func addTextButtonTapped(_ sender: UIButton) {

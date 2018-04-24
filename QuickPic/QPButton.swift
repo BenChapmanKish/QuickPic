@@ -13,12 +13,27 @@ import UIKit
 class QPButton: UIButton {
     
     var widthConstraint: NSLayoutConstraint!
+    var normalImage: UIImage?
     
     var normalSize: CGFloat = 30.0
     var highlightedSizeIncrease: CGFloat = 10.0
+    
+    static var spinAnimation: CABasicAnimation = {
+        let animation = CABasicAnimation(keyPath: "transform.rotation")
+        
+        animation.fromValue = 0.0
+        animation.toValue = CGFloat.pi * 2
+        animation.duration = 1.0
+        animation.repeatCount = .infinity
+        
+        return animation
+    }()
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.normalImage = self.image(for: .normal)
         
         // Grab an existing width constraint, or create one if needed
         if let widthConstraint = self.constraints.first(where: {
@@ -62,4 +77,19 @@ class QPButton: UIButton {
         self.widthConstraint.constant = self.normalSize
     }
 
+    
+    /// Become an animated loading spinner while an action happens
+    public func becomeSpinner() {
+        self.isUserInteractionEnabled = false
+        self.setImage(#imageLiteral(resourceName: "Spinner"), for: .normal)
+        self.layer.add(QPButton.spinAnimation, forKey: nil)
+    }
+    
+    /// Stop being a loading spinner and return to normal
+    public func endSpinner() {
+        guard let normalImage = self.normalImage else { return }
+        self.layer.removeAllAnimations()
+        self.setImage(normalImage, for: .normal)
+        self.isUserInteractionEnabled = true
+    }
 }

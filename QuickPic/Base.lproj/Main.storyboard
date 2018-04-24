@@ -250,6 +250,7 @@
                     <connections>
                         <outlet property="capturedImageView" destination="UdH-c1-41f" id="ePn-66-led"/>
                         <outlet property="editsOverlayView" destination="MmK-G3-Ief" id="ssu-cV-DvK"/>
+                        <outlet property="saveButton" destination="nWI-eG-oZ8" id="jfy-mn-W5M"/>
                         <outlet property="textBarBottomConstraint" destination="gwe-GG-CrX" id="e2E-iK-Wy2"/>
                         <outlet property="textBarContainer" destination="mWO-s6-niy" id="A0S-XO-qqQ"/>
                         <outlet property="textBarTextView" destination="XOi-ys-goZ" id="qZo-Gs-xkr"/>
