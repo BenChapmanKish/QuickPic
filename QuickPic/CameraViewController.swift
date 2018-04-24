@@ -27,7 +27,7 @@ enum CameraPageState: Equatable {
 class CameraViewController: UIViewController {
     @IBOutlet var livePreviewView: UIView!
     @IBOutlet var uiOverlayView: UIView!
-    @IBOutlet var flashIndicatorButton: UIButton!
+    @IBOutlet var flashIndicatorButton: QPButton!
     
     var captureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?

@@ -18,6 +18,7 @@
 		B583A2072086CED0002C4EA7 /* CorePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B583A2062086CED0002C4EA7 /* CorePageViewController.swift */; };
 		B59BA6222086F178005B66CB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59BA6212086F178005B66CB /* CameraViewController.swift */; };
 		B59BA6262086F716005B66CB /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */; };
+		B5D05289208EEC5A00BD3802 /* QPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D05288208EEC5A00BD3802 /* QPButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		B583A2062086CED0002C4EA7 /* CorePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorePageViewController.swift; sourceTree = "<group>"; };
 		B59BA6212086F178005B66CB /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helpers.swift"; sourceTree = "<group>"; };
+		B5D05288208EEC5A00BD3802 /* QPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				B547E465208D97A900FBF67B /* EditPicViewController.swift */,
 				B547E467208D9EF900FBF67B /* PassthroughView.swift */,
 				B547E469208DA56600FBF67B /* Constants.swift */,
+				B5D05288208EEC5A00BD3802 /* QPButton.swift */,
 			);
 			path = QuickPic;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				B583A1B52086C8FE002C4EA7 /* AppDelegate.swift in Sources */,
 				B547E46A208DA56600FBF67B /* Constants.swift in Sources */,
 				B59BA6222086F178005B66CB /* CameraViewController.swift in Sources */,
+				B5D05289208EEC5A00BD3802 /* QPButton.swift in Sources */,
 				B547E466208D97A900FBF67B /* EditPicViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
