@@ -32,8 +32,7 @@ class EditPicViewController: UIViewController {
     @IBOutlet var textBarTextView: UITextView!
     
     private var capturedImage: UIImage?
-    private var picDisplayTime: Int = 10
-    private let possiblePicDisplayValues: [Int] = Array(1 ... 10)
+    private var picDisplayTime: Int = Constants.PicDisplay.defaultDisplayTime
     
     private var delegate: EditPageDelegate?
     private var textBarInitialPositionForGesture: CGFloat = 0.0
@@ -238,20 +237,20 @@ extension EditPicViewController : UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.possiblePicDisplayValues.count
+        return Constants.PicDisplay.possibleDisplayValues.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        guard row >= 0 && row < self.possiblePicDisplayValues.count else { return nil }
+        guard row >= 0 && row < Constants.PicDisplay.possibleDisplayValues.count else { return nil }
         
         if (row == 0) {
             return "1 second"
         } else {
-            return "\(self.possiblePicDisplayValues[row]) seconds"
+            return "\(Constants.PicDisplay.possibleDisplayValues[row]) seconds"
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.picDisplayTime = self.possiblePicDisplayValues[row]
+        self.picDisplayTime = Constants.PicDisplay.possibleDisplayValues[row]
     }
 }

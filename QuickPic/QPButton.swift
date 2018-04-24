@@ -17,15 +17,15 @@ class QPButton: UIButton {
     private var widthConstraint: NSLayoutConstraint!
     private var normalImage: UIImage?
     
-    private var normalSize: CGFloat = 30.0
-    private var highlightedSizeIncrease: CGFloat = 10.0
+    private var normalSize: CGFloat = Constants.QPButton.defaultNormalSize
+    private var highlightedSizeIncrease: CGFloat = Constants.QPButton.defaultHighlightedSizeIncrease
     
     private static var spinAnimation: CABasicAnimation = {
         let animation = CABasicAnimation(keyPath: "transform.rotation")
         
         animation.fromValue = 0.0
         animation.toValue = CGFloat.pi * 2
-        animation.duration = 1.0
+        animation.duration = Constants.QPButton.spinAnimationDuration
         animation.repeatCount = .infinity
         
         return animation
@@ -41,9 +41,9 @@ class QPButton: UIButton {
     
     private func setupShadow() {
         self.layer.masksToBounds = false
-        self.layer.shadowRadius = 3.0
+        self.layer.shadowRadius = Constants.QPButton.shadowRadius
+        self.layer.shadowOpacity = Constants.QPButton.shadowOpacity
         self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOpacity = 0.5
         self.layer.shadowOffset = .zero
     }
     

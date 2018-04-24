@@ -31,9 +31,9 @@ class CorePageViewController: UIPageViewController {
     
     private(set) lazy var orderedViewControllers: [UIViewController] = {
         return [
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InboxViewController"),
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CameraViewController"),
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController")
+            UIStoryboard(name: Ids.Identifiers.mainStoryboard, bundle: nil).instantiateViewController(withIdentifier: Ids.Identifiers.inboxVC),
+            UIStoryboard(name: Ids.Identifiers.mainStoryboard, bundle: nil).instantiateViewController(withIdentifier: Ids.Identifiers.cameraVC),
+            UIStoryboard(name: Ids.Identifiers.mainStoryboard, bundle: nil).instantiateViewController(withIdentifier: Ids.Identifiers.cameraVC)
         ]
     }()
     
