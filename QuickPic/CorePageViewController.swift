@@ -33,7 +33,7 @@ class CorePageViewController: UIPageViewController {
         return [
             UIStoryboard(name: Ids.Identifiers.mainStoryboard, bundle: nil).instantiateViewController(withIdentifier: Ids.Identifiers.inboxVC),
             UIStoryboard(name: Ids.Identifiers.mainStoryboard, bundle: nil).instantiateViewController(withIdentifier: Ids.Identifiers.cameraVC),
-            UIStoryboard(name: Ids.Identifiers.mainStoryboard, bundle: nil).instantiateViewController(withIdentifier: Ids.Identifiers.cameraVC)
+            UIStoryboard(name: Ids.Identifiers.mainStoryboard, bundle: nil).instantiateViewController(withIdentifier: Ids.Identifiers.profileVC)
         ]
     }()
     
