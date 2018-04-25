@@ -29,19 +29,22 @@ class CameraViewController: UIViewController {
     @IBOutlet var uiOverlayView: UIView!
     @IBOutlet var flashIndicatorButton: QPButton!
     
+    private var captureDevice: AVCaptureDevice?
     private var captureSession: AVCaptureSession?
     private var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     private var capturePhotoOutput: AVCapturePhotoOutput?
-    
     
     private var state: CameraPageState = .livePreview
     private var flashMode: AVCaptureDevice.FlashMode = .auto
     private var cameraPosition: AVCaptureDevice.Position = .back
     
+    private var zoomScale: CGFloat = 1.0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupSwitchCameraGesture()
+        self.setupPinchToZoomGesture()
         self.setupCamera()
         
         if let lastFlashModeInt = UserDefaults.standard.value(forKey: UserDefaultsKeys.lastFlashMode) as? Int,
@@ -54,6 +57,7 @@ class CameraViewController: UIViewController {
         let position = cameraPosition ?? self.cameraPosition
         
         guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: position) else { return }
+        self.captureDevice = captureDevice
         
         self.state = .livePreview
         self.cameraPosition = position
@@ -96,14 +100,20 @@ class CameraViewController: UIViewController {
         captureSession.startRunning()
     }
     
+    private func setupPinchToZoomGesture() {
+        let pinchGR = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture(_:)))
+        self.uiOverlayView.addGestureRecognizer(pinchGR)
+    }
+    
     private func setupSwitchCameraGesture() {
-        let tapGR = UITapGestureRecognizer(target: self, action: #selector(CameraViewController.handleDoubleTap(_:)))
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTapGesture(_:)))
         tapGR.delegate = self
         tapGR.numberOfTapsRequired = 2
         self.uiOverlayView.addGestureRecognizer(tapGR)
     }
     
     public func switchCameras() {
+        self.setVideoZoomScale(to: 1.0)
         if self.cameraPosition == .back {
             self.setupCamera(forPosition: .front)
         } else {
@@ -188,12 +198,46 @@ class CameraViewController: UIViewController {
             self.captureSession?.stopRunning()
         }
     }
+    
+    private func setVideoZoomScale(to zoomScale: CGFloat) {
+        guard let captureDevice = self.captureDevice else { return }
+        
+        do {
+            try captureDevice.lockForConfiguration()
+            
+            self.zoomScale = max(1.0, min(zoomScale,  captureDevice.activeFormat.videoMaxZoomFactor, Constants.Camera.maxZoomFactor))
+            captureDevice.videoZoomFactor = self.zoomScale
+            
+            captureDevice.unlockForConfiguration()
+        } catch {
+            return
+        }
+    }
+}
+
+
+
+extension CameraViewController : UIGestureRecognizerDelegate {
+    @objc func handleDoubleTapGesture(_ gesture: UITapGestureRecognizer){
+        self.switchCameras()
+    }
+    
+    @objc func handlePinchGesture(_ gesture: UIPinchGestureRecognizer) {
+        switch gesture.state {
+        case .changed:
+            let desiredZoomScale = self.zoomScale + atan2(gesture.velocity, Constants.Camera.pinchVelocityDivisionFactor)
+            self.setVideoZoomScale(to: desiredZoomScale)
+        default:
+            break
+        }
+    }
 }
 
 extension CameraViewController : EditPageDelegate {
     func editPageWillDismiss() {
         if let captureSession = self.captureSession {
             self.state = .livePreview
+            self.setVideoZoomScale(to: 1.0)
             captureSession.startRunning()
         } else {
             self.setupCamera()
@@ -213,11 +257,5 @@ extension CameraViewController : AVCapturePhotoCaptureDelegate {
                 let capturedImage = UIImage.init(data: imageData) else { return }
             self.enterEditState(withImage: capturedImage)
         }
-    }
-}
-
-extension CameraViewController : UIGestureRecognizerDelegate {
-    @objc func handleDoubleTap(_ gesture: UITapGestureRecognizer){
-        self.switchCameras()
     }
 }

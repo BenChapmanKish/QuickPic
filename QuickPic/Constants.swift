@@ -34,6 +34,10 @@ struct UserDefaultsKeys {
 }
 
 struct Constants {
+    struct Camera {
+        static let pinchVelocityDivisionFactor: CGFloat = 40.0
+        static let maxZoomFactor: CGFloat = 10.0
+    }
     
     struct PicDisplay {
         static let possibleDisplayValues: [Int] = Array(1 ... 10)

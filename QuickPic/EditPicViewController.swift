@@ -58,12 +58,12 @@ class EditPicViewController: UIViewController {
         self.textBarContainer.isHidden = true
         self.textBarTextView.delegate = self
         
-        let tapGR = UITapGestureRecognizer(target: self, action: #selector(EditPicViewController.handleSingleTap(_:)))
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(handleSingleTapGesture(_:)))
         tapGR.delegate = self
         // Add gesture to edits overlay view since ui overlay view passes through taps
         self.editsOverlayView.addGestureRecognizer(tapGR)
         
-        let panGR = UIPanGestureRecognizer(target: self, action: #selector(EditPicViewController.handlePanGesture(_:)))
+        let panGR = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         panGR.delegate = self
         panGR.maximumNumberOfTouches = 1
         self.textBarContainer.addGestureRecognizer(panGR)
@@ -200,7 +200,7 @@ class EditPicViewController: UIViewController {
 }
 
 extension EditPicViewController : UIGestureRecognizerDelegate {
-    @objc func handleSingleTap(_ gesture: UITapGestureRecognizer){
+    @objc func handleSingleTapGesture(_ gesture: UITapGestureRecognizer) {
         if self.textBarContainer.isHidden {
             // Add the text bar at the same vertical location that was tapped
             self.showTextBar(atHeight: gesture.location(in: self.editsOverlayView).y)
@@ -209,7 +209,7 @@ extension EditPicViewController : UIGestureRecognizerDelegate {
         }
     }
     
-    @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer){
+    @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         guard self.textBarContainer == gesture.view,
             !self.textBarContainer.isHidden,
             !self.textBarTextView.isFirstResponder else { return }
