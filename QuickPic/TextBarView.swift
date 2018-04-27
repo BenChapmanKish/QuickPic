@@ -22,8 +22,6 @@ class TextBarView: UIView {
     private var position: CGFloat = 0.0
     
     private var delegate: TextBarViewDelegate?
-    
-    private var constraintAnimator: UIViewPropertyAnimator?
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -111,11 +109,23 @@ class TextBarView: UIView {
         guard let superview = self.superview else { return }
         var topConstant = superview.frame.height - self.frame.height - bottomConstant
         topConstant = min(max(0, topConstant), superview.frame.height - self.frame.height)
-        self.topConstraint.constant = topConstant
+        self.animateConstraintChange(constant: topConstant, andBeginEditing: true)
     }
     
     public func switchToTopConstraint() {
-        self.topConstraint.constant = self.position
+        self.animateConstraintChange(constant: self.position)
+    }
+    
+    private func animateConstraintChange(constant: CGFloat, andBeginEditing beginEditing: Bool = false) {
+        self.superview?.layoutIfNeeded()
+        self.topConstraint.constant = constant
+        UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: Constants.TextBar.animationDuration,
+            delay: 0,
+            options: [.curveEaseOut],
+            animations: {
+                self.superview?.layoutIfNeeded()
+        })
     }
     
     public func stopEditing() {

@@ -82,6 +82,7 @@ class EditPicViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: QPButton) {
+        self.stopEditingTextBar()
         self.saveImageToCameraRoll()
     }
     
