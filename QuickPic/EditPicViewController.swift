@@ -133,6 +133,7 @@ class EditPicViewController: UIViewController {
     
     @IBAction func nextButtonTapped(_ sender: QPButton) {
         // TODO: Implement
+        self.showAlertWithOkButton(message: "This feature hasn't been implemented yet!")
     }
     
     override var prefersStatusBarHidden: Bool {
