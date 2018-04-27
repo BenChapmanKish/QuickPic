@@ -25,23 +25,18 @@ class EditPicViewController: UIViewController {
     @IBOutlet var timePickerContainer: UIView!
     @IBOutlet var timePickerView: UIPickerView!
     
-    @IBOutlet var textBarTopConstraint: NSLayoutConstraint!
-    @IBOutlet var textBarBottomConstraint: NSLayoutConstraint!
-    
-    @IBOutlet var textBarContainer: UIView!
-    @IBOutlet var textBarTextView: UITextView!
-    
     private var capturedImage: UIImage?
     private var picDisplayTime: Int = Constants.PicDisplay.defaultDisplayTime
     
+    private var editingTextBarView: TextBarView?
+    private var keyboardFrameHeight: CGFloat = 0.0
+    
     private var delegate: EditPageDelegate?
-    private var textBarInitialPositionForGesture: CGFloat = 0.0
-    private var textBarPosition: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.capturedImageView.image = self.capturedImage
-        self.setupTextBar()
+        self.setupAddTextBarGesture()
         self.setupPickerView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(notification:)), name:NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
@@ -54,19 +49,11 @@ class EditPicViewController: UIViewController {
         self.delegate = delegate
     }
     
-    private func setupTextBar() {
-        self.textBarContainer.isHidden = true
-        self.textBarTextView.delegate = self
-        
+    private func setupAddTextBarGesture() {
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(handleSingleTapGesture(_:)))
         tapGR.delegate = self
         // Add gesture to edits overlay view since ui overlay view passes through taps
         self.editsOverlayView.addGestureRecognizer(tapGR)
-        
-        let panGR = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-        panGR.delegate = self
-        panGR.maximumNumberOfTouches = 1
-        self.textBarContainer.addGestureRecognizer(panGR)
     }
     
     private func setupPickerView() {
@@ -116,41 +103,11 @@ class EditPicViewController: UIViewController {
     }
     
     @IBAction func addTextButtonTapped(_ sender: QPButton) {
-        if self.textBarContainer.isHidden {
-            self.showTextBar()
-        } else if !self.textBarTextView.isFirstResponder {
-            self.textBarTextView.selectedRange = NSMakeRange(self.textBarTextView.text.count, 0)
-            self.textBarTextView.becomeFirstResponder()
+        if self.editingTextBarView == nil {
+            self.createNewTextBar()
         } else {
-            self.stopEditingTextBarAndHideIfEmpty()
+            self.stopEditingTextBar()
         }
-    }
-    
-    /** Shows the text bar and make it the first responder.
- 
-    - Parameters:
-        - height: The distance that should separate the top of the screen from the top of the text bar.
-          If none provided, it will show in the middle of the screen.
-     */
-    public func showTextBar(atHeight height: CGFloat? = nil) {
-        let barHeight = height ?? (self.view.frame.height / 2 - self.textBarContainer.frame.height / 2)
-        self.setTextBarPosition(to: barHeight)
-        self.textBarContainer.isHidden = false
-        self.textBarTextView.becomeFirstResponder()
-    }
-    
-    public func stopEditingTextBarAndHideIfEmpty() {
-        self.textBarTextView.resignFirstResponder()
-        if self.textBarTextView.text.count == 0 {
-            self.textBarContainer.isHidden = true
-        }
-    }
-    
-    // Using explicit setter for expressiveness
-    /// Constrains the text bar so that it will remain fully visible on-screen
-    public func setTextBarPosition(to newPosition: CGFloat) {
-        self.textBarPosition = min(max(0, newPosition), self.editsOverlayView.frame.height - self.textBarContainer.frame.height)
-        self.textBarTopConstraint.constant = self.textBarPosition
     }
     
     @IBAction func timerButtonTapped(_ sender: QPButton) {
@@ -181,61 +138,50 @@ class EditPicViewController: UIViewController {
         return true
     }
     
+    private func createNewTextBar(atPosition position: CGFloat? = nil) {
+        let textBar = TextBarView(inView: self.editsOverlayView, atPosition: position, delegate: self)
+        self.editingTextBarView = textBar
+        textBar.beginEditing()
+    }
     
     @objc func keyboardWillChangeFrame(notification: NSNotification) {
         guard let userInfo = notification.userInfo,
             let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
                 return
         }
-        
-        self.textBarTopConstraint.isActive = false
-        self.textBarBottomConstraint.isActive = true
-        self.textBarBottomConstraint.constant = self.view.safeAreaInsets.bottom + keyboardFrame.height
+        self.keyboardFrameHeight = keyboardFrame.height
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        self.textBarBottomConstraint.isActive = false
-        self.textBarTopConstraint.isActive = true
+        self.stopEditingTextBar()
+    }
+    
+    private func stopEditingTextBar() {
+        self.editingTextBarView?.stopEditing()
+        self.editingTextBarView = nil
     }
 }
 
 extension EditPicViewController : UIGestureRecognizerDelegate {
     @objc func handleSingleTapGesture(_ gesture: UITapGestureRecognizer) {
-        if self.textBarContainer.isHidden {
-            // Add the text bar at the same vertical location that was tapped
-            self.showTextBar(atHeight: gesture.location(in: self.editsOverlayView).y)
+        if self.editingTextBarView != nil {
+            self.stopEditingTextBar()
         } else {
-            self.stopEditingTextBarAndHideIfEmpty()
-        }
-    }
-    
-    @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
-        guard self.textBarContainer == gesture.view,
-            !self.textBarContainer.isHidden,
-            !self.textBarTextView.isFirstResponder else { return }
-        
-        let translation = gesture.translation(in: self.editsOverlayView).y
-        
-        switch gesture.state {
-        case .began:
-            self.textBarInitialPositionForGesture = self.textBarPosition
-        case .changed:
-            // Track changes for this continuous gesture
-            self.setTextBarPosition(to: self.textBarInitialPositionForGesture + translation)
-        default:
-            break
+            // Add the text bar at the same vertical location that was tapped
+            let barPosition = gesture.location(in: self.editsOverlayView).y
+            self.createNewTextBar(atPosition: barPosition)
         }
     }
 }
 
-extension EditPicViewController : UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if textView == self.textBarTextView,
-            text == "\n" {
-            self.stopEditingTextBarAndHideIfEmpty()
-            return false
-        }
-        return true
+extension EditPicViewController : TextBarViewDelegate {
+    func textBarViewDidBeginEditing(_ textView: TextBarView) {
+        self.editingTextBarView = textView
+        textView.switchToBottomConstraint(withConstant: self.view.safeAreaInsets.bottom + self.keyboardFrameHeight)
+    }
+    
+    func textBarViewMayBeDragged() -> Bool {
+        return self.editingTextBarView == nil
     }
 }
 

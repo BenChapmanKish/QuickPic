@@ -148,38 +148,7 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MmK-G3-Ief">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mWO-s6-niy">
-                                        <rect key="frame" x="0.0" y="320" width="375" height="43.5"/>
-                                        <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XOi-ys-goZ">
-                                                <rect key="frame" x="3" y="3" width="369" height="37.5"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
-                                            </textView>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80297517123287676" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="XOi-ys-goZ" secondAttribute="bottom" constant="3" id="Flp-mo-ab8"/>
-                                            <constraint firstItem="XOi-ys-goZ" firstAttribute="top" secondItem="mWO-s6-niy" secondAttribute="top" constant="3" id="fi6-cc-mo2"/>
-                                            <constraint firstAttribute="trailing" secondItem="XOi-ys-goZ" secondAttribute="trailing" constant="3" id="irV-q4-KNw"/>
-                                            <constraint firstItem="XOi-ys-goZ" firstAttribute="leading" secondItem="mWO-s6-niy" secondAttribute="leading" constant="3" id="rJr-zR-g65"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="mWO-s6-niy" firstAttribute="leading" secondItem="MmK-G3-Ief" secondAttribute="leading" id="A1U-UD-cTh"/>
-                                    <constraint firstAttribute="trailing" secondItem="mWO-s6-niy" secondAttribute="trailing" id="VzX-OK-RW2"/>
-                                    <constraint firstAttribute="bottom" secondItem="mWO-s6-niy" secondAttribute="bottom" constant="300" id="gwe-GG-CrX"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="gwe-GG-CrX"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5hy-Kn-KtY" customClass="PassthroughView" customModule="QuickPic" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
@@ -293,7 +262,6 @@
                             <constraint firstItem="9Cz-tR-ygG" firstAttribute="bottom" secondItem="5hy-Kn-KtY" secondAttribute="bottom" id="NYZ-Kr-Ddr"/>
                             <constraint firstItem="M75-xv-hRb" firstAttribute="leading" secondItem="9Cz-tR-ygG" secondAttribute="leading" id="OEV-gW-e0z"/>
                             <constraint firstItem="5hy-Kn-KtY" firstAttribute="top" secondItem="9Cz-tR-ygG" secondAttribute="top" id="QCb-5o-JcN"/>
-                            <constraint firstItem="mWO-s6-niy" firstAttribute="top" secondItem="9Cz-tR-ygG" secondAttribute="top" constant="300" id="Sah-Tg-4QN"/>
                             <constraint firstItem="9Cz-tR-ygG" firstAttribute="bottom" secondItem="M75-xv-hRb" secondAttribute="bottom" id="UYe-Uy-ycz"/>
                             <constraint firstItem="MmK-G3-Ief" firstAttribute="top" secondItem="LSs-fr-doM" secondAttribute="top" id="bi8-A4-YaI"/>
                             <constraint firstItem="UdH-c1-41f" firstAttribute="top" secondItem="LSs-fr-doM" secondAttribute="top" id="emE-qV-qKL"/>
@@ -310,10 +278,6 @@
                         <outlet property="capturedImageView" destination="UdH-c1-41f" id="ePn-66-led"/>
                         <outlet property="editsOverlayView" destination="MmK-G3-Ief" id="ssu-cV-DvK"/>
                         <outlet property="saveButton" destination="nWI-eG-oZ8" id="jfy-mn-W5M"/>
-                        <outlet property="textBarBottomConstraint" destination="gwe-GG-CrX" id="e2E-iK-Wy2"/>
-                        <outlet property="textBarContainer" destination="mWO-s6-niy" id="A0S-XO-qqQ"/>
-                        <outlet property="textBarTextView" destination="XOi-ys-goZ" id="qZo-Gs-xkr"/>
-                        <outlet property="textBarTopConstraint" destination="Sah-Tg-4QN" id="AqJ-hw-CLE"/>
                         <outlet property="timePickerContainer" destination="M75-xv-hRb" id="TOX-WO-M7M"/>
                         <outlet property="timePickerView" destination="bGU-B4-PuC" id="K0b-jx-1U7"/>
                         <outlet property="uiOverlayView" destination="5hy-Kn-KtY" id="1xv-EQ-dZP"/>

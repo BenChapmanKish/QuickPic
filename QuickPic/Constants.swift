@@ -39,6 +39,13 @@ struct Constants {
         static let maxZoomFactor: CGFloat = 10.0
     }
     
+    struct TextBar {
+        static let backgroundColor = UIColor(white: 0.0, alpha: 0.8)
+        static let fontSize: CGFloat = 16.0
+        static let textInset: CGFloat = 3.0
+        static let animationDuration: TimeInterval = 1
+    }
+    
     struct PicDisplay {
         static let possibleDisplayValues: [Int] = Array(1 ... 10)
         static let defaultDisplayTime: Int = 10
