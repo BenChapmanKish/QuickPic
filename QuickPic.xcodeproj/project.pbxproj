@@ -12,6 +12,7 @@
 		B547E466208D97A900FBF67B /* EditPicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547E465208D97A900FBF67B /* EditPicViewController.swift */; };
 		B547E468208D9EF900FBF67B /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547E467208D9EF900FBF67B /* PassthroughView.swift */; };
 		B547E46A208DA56600FBF67B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547E469208DA56600FBF67B /* Constants.swift */; };
+		B567215A20942DE3008D032E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567215920942DE3008D032E /* ProfileViewController.swift */; };
 		B583A1B52086C8FE002C4EA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B583A1B42086C8FE002C4EA7 /* AppDelegate.swift */; };
 		B583A1BA2086C8FE002C4EA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B583A1B82086C8FE002C4EA7 /* Main.storyboard */; };
 		B583A1BC2086C8FE002C4EA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B583A1BB2086C8FE002C4EA7 /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 		B547E465208D97A900FBF67B /* EditPicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPicViewController.swift; sourceTree = "<group>"; };
 		B547E467208D9EF900FBF67B /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
 		B547E469208DA56600FBF67B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B567215920942DE3008D032E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B583A1B12086C8FE002C4EA7 /* QuickPic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickPic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B583A1B42086C8FE002C4EA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B583A1B92086C8FE002C4EA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -106,6 +108,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B567215B20942DEF008D032E /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				B59BA6212086F178005B66CB /* CameraViewController.swift */,
+				B547E465208D97A900FBF67B /* EditPicViewController.swift */,
+				B587482F20904F2900FF8684 /* TextBarView.swift */,
+				B547E467208D9EF900FBF67B /* PassthroughView.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
 		B583A1A82086C8FE002C4EA7 = {
 			isa = PBXGroup;
 			children = (
@@ -138,10 +151,8 @@
 				B58748362094077300FF8684 /* GoogleService-Info.plist */,
 				B58748382094158500FF8684 /* SignInViewController.swift */,
 				B583A2062086CED0002C4EA7 /* CorePageViewController.swift */,
-				B59BA6212086F178005B66CB /* CameraViewController.swift */,
-				B547E465208D97A900FBF67B /* EditPicViewController.swift */,
-				B587482F20904F2900FF8684 /* TextBarView.swift */,
-				B547E467208D9EF900FBF67B /* PassthroughView.swift */,
+				B567215920942DE3008D032E /* ProfileViewController.swift */,
+				B567215B20942DEF008D032E /* Camera */,
 				B5D05288208EEC5A00BD3802 /* QPButton.swift */,
 				B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */,
 				B5D05282208EAFFB00BD3802 /* UIView+Helpers.swift */,
@@ -355,6 +366,7 @@
 				B583A2072086CED0002C4EA7 /* CorePageViewController.swift in Sources */,
 				B5D05283208EAFFB00BD3802 /* UIView+Helpers.swift in Sources */,
 				B583A1B52086C8FE002C4EA7 /* AppDelegate.swift in Sources */,
+				B567215A20942DE3008D032E /* ProfileViewController.swift in Sources */,
 				B547E46A208DA56600FBF67B /* Constants.swift in Sources */,
 				B587483020904F2900FF8684 /* TextBarView.swift in Sources */,
 				B59BA6222086F178005B66CB /* CameraViewController.swift in Sources */,

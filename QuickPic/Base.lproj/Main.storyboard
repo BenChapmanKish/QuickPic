@@ -56,10 +56,10 @@
             </objects>
             <point key="canvasLocation" x="686" y="121"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="IC7-ed-vCb">
             <objects>
-                <viewController storyboardIdentifier="ProfileViewController" id="oVp-DP-CCu" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="oVp-DP-CCu" customClass="ProfileViewController" customModule="QuickPic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zv3-Iv-jzg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
