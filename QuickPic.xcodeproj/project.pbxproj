@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A4F91AA8F694935207B4E4F /* Pods_QuickPic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9C4B0D3334AD2A06250A00B /* Pods_QuickPic.framework */; };
+		3EC3892FD1A14EA8EB368788 /* Pods_QuickPicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3518BBE5B9467F0379B8B28 /* Pods_QuickPicTests.framework */; };
 		B547E466208D97A900FBF67B /* EditPicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547E465208D97A900FBF67B /* EditPicViewController.swift */; };
 		B547E468208D9EF900FBF67B /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547E467208D9EF900FBF67B /* PassthroughView.swift */; };
 		B547E46A208DA56600FBF67B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547E469208DA56600FBF67B /* Constants.swift */; };
@@ -17,6 +19,7 @@
 		B583A1CA2086C8FE002C4EA7 /* QuickPicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B583A1C92086C8FE002C4EA7 /* QuickPicTests.swift */; };
 		B583A2072086CED0002C4EA7 /* CorePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B583A2062086CED0002C4EA7 /* CorePageViewController.swift */; };
 		B587483020904F2900FF8684 /* TextBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B587482F20904F2900FF8684 /* TextBarView.swift */; };
+		B58748372094077300FF8684 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B58748362094077300FF8684 /* GoogleService-Info.plist */; };
 		B59BA6222086F178005B66CB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59BA6212086F178005B66CB /* CameraViewController.swift */; };
 		B59BA6262086F716005B66CB /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */; };
 		B5D05283208EAFFB00BD3802 /* UIView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D05282208EAFFB00BD3802 /* UIView+Helpers.swift */; };
@@ -34,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		497C0BAFA0087C46B1C9FB57 /* Pods-QuickPicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuickPicTests/Pods-QuickPicTests.release.xcconfig"; sourceTree = "<group>"; };
+		A756FEDAC2EFB1E294A749BF /* Pods-QuickPic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPic.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuickPic/Pods-QuickPic.release.xcconfig"; sourceTree = "<group>"; };
 		B547E465208D97A900FBF67B /* EditPicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPicViewController.swift; sourceTree = "<group>"; };
 		B547E467208D9EF900FBF67B /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
 		B547E469208DA56600FBF67B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -48,10 +53,15 @@
 		B583A1CB2086C8FE002C4EA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B583A2062086CED0002C4EA7 /* CorePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorePageViewController.swift; sourceTree = "<group>"; };
 		B587482F20904F2900FF8684 /* TextBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBarView.swift; sourceTree = "<group>"; };
+		B58748362094077300FF8684 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B59BA6212086F178005B66CB /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helpers.swift"; sourceTree = "<group>"; };
 		B5D05282208EAFFB00BD3802 /* UIView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Helpers.swift"; sourceTree = "<group>"; };
 		B5D05288208EEC5A00BD3802 /* QPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPButton.swift; sourceTree = "<group>"; };
+		C383FD5236FE2D0D2BBEA427 /* Pods-QuickPic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuickPic/Pods-QuickPic.debug.xcconfig"; sourceTree = "<group>"; };
+		E3518BBE5B9467F0379B8B28 /* Pods_QuickPicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickPicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3690F16943382E08840110B /* Pods-QuickPicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuickPicTests/Pods-QuickPicTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F9C4B0D3334AD2A06250A00B /* Pods_QuickPic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickPic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A4F91AA8F694935207B4E4F /* Pods_QuickPic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,18 +77,41 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EC3892FD1A14EA8EB368788 /* Pods_QuickPicTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20CF632957962EB7EB4698E8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C383FD5236FE2D0D2BBEA427 /* Pods-QuickPic.debug.xcconfig */,
+				A756FEDAC2EFB1E294A749BF /* Pods-QuickPic.release.xcconfig */,
+				E3690F16943382E08840110B /* Pods-QuickPicTests.debug.xcconfig */,
+				497C0BAFA0087C46B1C9FB57 /* Pods-QuickPicTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7018BDD9E34961081194C0ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F9C4B0D3334AD2A06250A00B /* Pods_QuickPic.framework */,
+				E3518BBE5B9467F0379B8B28 /* Pods_QuickPicTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B583A1A82086C8FE002C4EA7 = {
 			isa = PBXGroup;
 			children = (
 				B583A1B32086C8FE002C4EA7 /* QuickPic */,
 				B583A1C82086C8FE002C4EA7 /* QuickPicTests */,
 				B583A1B22086C8FE002C4EA7 /* Products */,
+				20CF632957962EB7EB4698E8 /* Pods */,
+				7018BDD9E34961081194C0ED /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +141,7 @@
 				B5D05288208EEC5A00BD3802 /* QPButton.swift */,
 				B587482F20904F2900FF8684 /* TextBarView.swift */,
 				B5D05282208EAFFB00BD3802 /* UIView+Helpers.swift */,
+				B58748362094077300FF8684 /* GoogleService-Info.plist */,
 			);
 			path = QuickPic;
 			sourceTree = "<group>";
@@ -127,9 +162,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B583A1CE2086C8FE002C4EA7 /* Build configuration list for PBXNativeTarget "QuickPic" */;
 			buildPhases = (
+				EB2745688E9913A5CEFF4D85 /* [CP] Check Pods Manifest.lock */,
 				B583A1AD2086C8FE002C4EA7 /* Sources */,
 				B583A1AE2086C8FE002C4EA7 /* Frameworks */,
 				B583A1AF2086C8FE002C4EA7 /* Resources */,
+				01C54B6AD80B8942E0E1C77E /* [CP] Embed Pods Frameworks */,
+				5D66ED30B24C589D0BFE6422 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -144,6 +182,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B583A1D12086C8FE002C4EA7 /* Build configuration list for PBXNativeTarget "QuickPicTests" */;
 			buildPhases = (
+				1A93BC5CCA9DB43573F4E909 /* [CP] Check Pods Manifest.lock */,
 				B583A1C12086C8FE002C4EA7 /* Sources */,
 				B583A1C22086C8FE002C4EA7 /* Frameworks */,
 				B583A1C32086C8FE002C4EA7 /* Resources */,
@@ -202,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B583A1BF2086C8FE002C4EA7 /* LaunchScreen.storyboard in Resources */,
+				B58748372094077300FF8684 /* GoogleService-Info.plist in Resources */,
 				B583A1BC2086C8FE002C4EA7 /* Assets.xcassets in Resources */,
 				B583A1BA2086C8FE002C4EA7 /* Main.storyboard in Resources */,
 			);
@@ -215,6 +255,91 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		01C54B6AD80B8942E0E1C77E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-QuickPic/Pods-QuickPic-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QuickPic/Pods-QuickPic-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1A93BC5CCA9DB43573F4E909 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuickPicTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5D66ED30B24C589D0BFE6422 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-QuickPic/Pods-QuickPic-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseGoogleAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QuickPic/Pods-QuickPic-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB2745688E9913A5CEFF4D85 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuickPic-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B583A1AD2086C8FE002C4EA7 /* Sources */ = {
@@ -388,6 +513,7 @@
 		};
 		B583A1CF2086C8FE002C4EA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C383FD5236FE2D0D2BBEA427 /* Pods-QuickPic.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -406,6 +532,7 @@
 		};
 		B583A1D02086C8FE002C4EA7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A756FEDAC2EFB1E294A749BF /* Pods-QuickPic.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -424,6 +551,7 @@
 		};
 		B583A1D22086C8FE002C4EA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3690F16943382E08840110B /* Pods-QuickPicTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -445,6 +573,7 @@
 		};
 		B583A1D32086C8FE002C4EA7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 497C0BAFA0087C46B1C9FB57 /* Pods-QuickPicTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
