@@ -25,7 +25,7 @@
 		B59BA6222086F178005B66CB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59BA6212086F178005B66CB /* CameraViewController.swift */; };
 		B59BA6262086F716005B66CB /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */; };
 		B5D05283208EAFFB00BD3802 /* UIView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D05282208EAFFB00BD3802 /* UIView+Helpers.swift */; };
-		B5D05289208EEC5A00BD3802 /* QPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D05288208EEC5A00BD3802 /* QPButton.swift */; };
+		B5D05289208EEC5A00BD3802 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D05288208EEC5A00BD3802 /* IconButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +61,7 @@
 		B59BA6212086F178005B66CB /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helpers.swift"; sourceTree = "<group>"; };
 		B5D05282208EAFFB00BD3802 /* UIView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Helpers.swift"; sourceTree = "<group>"; };
-		B5D05288208EEC5A00BD3802 /* QPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPButton.swift; sourceTree = "<group>"; };
+		B5D05288208EEC5A00BD3802 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		C383FD5236FE2D0D2BBEA427 /* Pods-QuickPic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuickPic/Pods-QuickPic.debug.xcconfig"; sourceTree = "<group>"; };
 		E3518BBE5B9467F0379B8B28 /* Pods_QuickPicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickPicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3690F16943382E08840110B /* Pods-QuickPicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuickPicTests/Pods-QuickPicTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 				B583A2062086CED0002C4EA7 /* CorePageViewController.swift */,
 				B567215920942DE3008D032E /* ProfileViewController.swift */,
 				B567215B20942DEF008D032E /* Camera */,
-				B5D05288208EEC5A00BD3802 /* QPButton.swift */,
+				B5D05288208EEC5A00BD3802 /* IconButton.swift */,
 				B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */,
 				B5D05282208EAFFB00BD3802 /* UIView+Helpers.swift */,
 			);
@@ -370,7 +370,7 @@
 				B547E46A208DA56600FBF67B /* Constants.swift in Sources */,
 				B587483020904F2900FF8684 /* TextBarView.swift in Sources */,
 				B59BA6222086F178005B66CB /* CameraViewController.swift in Sources */,
-				B5D05289208EEC5A00BD3802 /* QPButton.swift in Sources */,
+				B5D05289208EEC5A00BD3802 /* IconButton.swift in Sources */,
 				B547E466208D97A900FBF67B /* EditPicViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

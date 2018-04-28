@@ -20,7 +20,7 @@ class EditPicViewController: UIViewController {
     @IBOutlet var editsOverlayView: UIView!
     @IBOutlet var uiOverlayView: UIView!
     
-    @IBOutlet var saveButton: QPButton!
+    @IBOutlet var saveButton: IconButton!
     
     @IBOutlet var timePickerContainer: UIView!
     @IBOutlet var timePickerView: UIPickerView!
@@ -81,7 +81,7 @@ class EditPicViewController: UIViewController {
         return editedImage
     }
     
-    @IBAction func saveButtonTapped(_ sender: QPButton) {
+    @IBAction func saveButtonTapped(_ sender: IconButton) {
         self.stopEditingTextBar()
         self.saveImageToCameraRoll()
     }
@@ -103,7 +103,7 @@ class EditPicViewController: UIViewController {
         self.saveButton.endSpinner()
     }
     
-    @IBAction func addTextButtonTapped(_ sender: QPButton) {
+    @IBAction func addTextButtonTapped(_ sender: IconButton) {
         if self.editingTextBarView == nil {
             self.createNewTextBar()
         } else {
@@ -111,7 +111,7 @@ class EditPicViewController: UIViewController {
         }
     }
     
-    @IBAction func timerButtonTapped(_ sender: QPButton) {
+    @IBAction func timerButtonTapped(_ sender: IconButton) {
         if let row = Constants.PicDisplay.possibleDisplayValues.index(of: self.picDisplayTime) {
             self.timePickerView.selectRow(row, inComponent: 0, animated: false)
         }
@@ -126,12 +126,12 @@ class EditPicViewController: UIViewController {
     }
     
     
-    @IBAction func exitButtonTapped(_ sender: QPButton) {
+    @IBAction func exitButtonTapped(_ sender: IconButton) {
         self.delegate?.editPageWillDismiss()
         self.dismiss(animated: false, completion: nil)
     }
     
-    @IBAction func nextButtonTapped(_ sender: QPButton) {
+    @IBAction func nextButtonTapped(_ sender: IconButton) {
         // TODO: Implement
         self.showAlertWithOkButton(message: "This feature hasn't been implemented yet!")
     }

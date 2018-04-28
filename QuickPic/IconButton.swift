@@ -1,5 +1,5 @@
 //
-//  QPButton.swift
+//  IconButton.swift
 //  QuickPic
 //
 //  Created by Ben Chapman-Kish on 2018-04-24.
@@ -12,20 +12,20 @@ import UIKit
 
 fileprivate let minimumHitArea = CGSize(width: 50, height: 50)
 
-class QPButton: UIButton {
+class IconButton: UIButton {
     
     private var widthConstraint: NSLayoutConstraint!
     private var normalImage: UIImage?
     
-    private var normalSize: CGFloat = Constants.QPButton.defaultNormalSize
-    private var highlightedSizeIncrease: CGFloat = Constants.QPButton.defaultHighlightedSizeIncrease
+    private var normalSize: CGFloat = Constants.IconButton.defaultNormalSize
+    private var highlightedSizeIncrease: CGFloat = Constants.IconButton.defaultHighlightedSizeIncrease
     
     private static var spinAnimation: CABasicAnimation = {
         let animation = CABasicAnimation(keyPath: "transform.rotation")
         
         animation.fromValue = 0.0
         animation.toValue = CGFloat.pi * 2
-        animation.duration = Constants.QPButton.spinAnimationDuration
+        animation.duration = Constants.IconButton.spinAnimationDuration
         animation.repeatCount = .infinity
         
         return animation
@@ -41,8 +41,8 @@ class QPButton: UIButton {
     
     private func setupShadow() {
         self.layer.masksToBounds = false
-        self.layer.shadowRadius = Constants.QPButton.shadowRadius
-        self.layer.shadowOpacity = Constants.QPButton.shadowOpacity
+        self.layer.shadowRadius = Constants.IconButton.shadowRadius
+        self.layer.shadowOpacity = Constants.IconButton.shadowOpacity
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOffset = .zero
     }
@@ -50,7 +50,7 @@ class QPButton: UIButton {
     private func setupEnlargeOnHighlighted() {
         // Grab an existing width constraint, or create one if needed
         if let widthConstraint = self.constraints.first(where: {
-            return $0.firstItem as? QPButton == self
+            return $0.firstItem as? IconButton == self
                 && $0.firstAttribute == .width
                 && $0.constant > 0
                 && $0.secondItem == nil
@@ -65,9 +65,9 @@ class QPButton: UIButton {
         
         // Create an aspect ratio constraint if necessary
         if self.constraints.first(where: {
-            return $0.firstItem as? QPButton == self
+            return $0.firstItem as? IconButton == self
                 && $0.firstAttribute == .width
-                && $0.secondItem as? QPButton == self
+                && $0.secondItem as? IconButton == self
                 && $0.secondAttribute == .height
         }) == nil {
             NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1.0, constant: 0.0).isActive = true
@@ -94,7 +94,7 @@ class QPButton: UIButton {
         self.superview?.layoutIfNeeded()
         self.widthConstraint.constant = constant
         UIViewPropertyAnimator.runningPropertyAnimator(
-            withDuration: Constants.QPButton.growShrinkAnimationDuration,
+            withDuration: Constants.IconButton.growShrinkAnimationDuration,
             delay: 0,
             options: [.curveLinear,
                       .allowUserInteraction],
@@ -108,7 +108,7 @@ class QPButton: UIButton {
     public func becomeSpinner() {
         self.isUserInteractionEnabled = false
         self.setImage(#imageLiteral(resourceName: "Spinner"), for: .normal)
-        self.layer.add(QPButton.spinAnimation, forKey: nil)
+        self.layer.add(IconButton.spinAnimation, forKey: nil)
     }
     
     /// Stop being a loading spinner and return to normal

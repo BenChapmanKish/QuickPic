@@ -27,7 +27,7 @@ enum CameraPageState: Equatable {
 class CameraViewController: UIViewController {
     @IBOutlet var livePreviewView: UIView!
     @IBOutlet var uiOverlayView: UIView!
-    @IBOutlet var flashIndicatorButton: QPButton!
+    @IBOutlet var flashIndicatorButton: IconButton!
     
     private var captureDevice: AVCaptureDevice?
     private var captureSession: AVCaptureSession?
@@ -121,7 +121,7 @@ class CameraViewController: UIViewController {
         }
     }
     
-    @IBAction func flashButtonTapped(_ sender: QPButton) {
+    @IBAction func flashButtonTapped(_ sender: IconButton) {
         self.cycleFlashMode()
     }
     
@@ -149,11 +149,11 @@ class CameraViewController: UIViewController {
         UserDefaults.standard.set(self.flashMode.rawValue, forKey: UserDefaultsKeys.lastFlashMode)
     }
     
-    @IBAction func swapCameraButtonTapped(_ sender: QPButton) {
+    @IBAction func swapCameraButtonTapped(_ sender: IconButton) {
         self.switchCameras()
     }
     
-    @IBAction func captureButtonTapped(_ sender: QPButton) {
+    @IBAction func captureButtonTapped(_ sender: IconButton) {
         switch self.state {
         case .livePreview:
             self.captureImage()

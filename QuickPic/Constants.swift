@@ -54,7 +54,7 @@ struct Constants {
         static let pickerFontSize: CGFloat = 22.0
     }
     
-    struct QPButton {
+    struct IconButton {
         static let defaultNormalSize: CGFloat = 30.0
         static let defaultHighlightedSizeIncrease: CGFloat = 10.0
         static let shadowRadius: CGFloat = 3.0
