@@ -20,6 +20,7 @@
 		B583A2072086CED0002C4EA7 /* CorePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B583A2062086CED0002C4EA7 /* CorePageViewController.swift */; };
 		B587483020904F2900FF8684 /* TextBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B587482F20904F2900FF8684 /* TextBarView.swift */; };
 		B58748372094077300FF8684 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B58748362094077300FF8684 /* GoogleService-Info.plist */; };
+		B58748392094158500FF8684 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58748382094158500FF8684 /* SignInViewController.swift */; };
 		B59BA6222086F178005B66CB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59BA6212086F178005B66CB /* CameraViewController.swift */; };
 		B59BA6262086F716005B66CB /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */; };
 		B5D05283208EAFFB00BD3802 /* UIView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D05282208EAFFB00BD3802 /* UIView+Helpers.swift */; };
@@ -54,6 +55,7 @@
 		B583A2062086CED0002C4EA7 /* CorePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorePageViewController.swift; sourceTree = "<group>"; };
 		B587482F20904F2900FF8684 /* TextBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBarView.swift; sourceTree = "<group>"; };
 		B58748362094077300FF8684 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B58748382094158500FF8684 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		B59BA6212086F178005B66CB /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helpers.swift"; sourceTree = "<group>"; };
 		B5D05282208EAFFB00BD3802 /* UIView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Helpers.swift"; sourceTree = "<group>"; };
@@ -128,20 +130,21 @@
 			isa = PBXGroup;
 			children = (
 				B583A1B42086C8FE002C4EA7 /* AppDelegate.swift */,
-				B583A2062086CED0002C4EA7 /* CorePageViewController.swift */,
+				B547E469208DA56600FBF67B /* Constants.swift */,
+				B583A1BD2086C8FE002C4EA7 /* LaunchScreen.storyboard */,
 				B583A1B82086C8FE002C4EA7 /* Main.storyboard */,
 				B583A1BB2086C8FE002C4EA7 /* Assets.xcassets */,
-				B583A1BD2086C8FE002C4EA7 /* LaunchScreen.storyboard */,
 				B583A1C02086C8FE002C4EA7 /* Info.plist */,
-				B59BA6212086F178005B66CB /* CameraViewController.swift */,
-				B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */,
-				B547E465208D97A900FBF67B /* EditPicViewController.swift */,
-				B547E467208D9EF900FBF67B /* PassthroughView.swift */,
-				B547E469208DA56600FBF67B /* Constants.swift */,
-				B5D05288208EEC5A00BD3802 /* QPButton.swift */,
-				B587482F20904F2900FF8684 /* TextBarView.swift */,
-				B5D05282208EAFFB00BD3802 /* UIView+Helpers.swift */,
 				B58748362094077300FF8684 /* GoogleService-Info.plist */,
+				B58748382094158500FF8684 /* SignInViewController.swift */,
+				B583A2062086CED0002C4EA7 /* CorePageViewController.swift */,
+				B59BA6212086F178005B66CB /* CameraViewController.swift */,
+				B547E465208D97A900FBF67B /* EditPicViewController.swift */,
+				B587482F20904F2900FF8684 /* TextBarView.swift */,
+				B547E467208D9EF900FBF67B /* PassthroughView.swift */,
+				B5D05288208EEC5A00BD3802 /* QPButton.swift */,
+				B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */,
+				B5D05282208EAFFB00BD3802 /* UIView+Helpers.swift */,
 			);
 			path = QuickPic;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B58748392094158500FF8684 /* SignInViewController.swift in Sources */,
 				B59BA6262086F716005B66CB /* UIViewController+Helpers.swift in Sources */,
 				B547E468208D9EF900FBF67B /* PassthroughView.swift in Sources */,
 				B583A2072086CED0002C4EA7 /* CorePageViewController.swift in Sources */,

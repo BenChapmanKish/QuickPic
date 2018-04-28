@@ -19,6 +19,7 @@ struct Ids {
     
     struct Segues {
         static let showEditPicVC = "showEditPicVC"
+        static let showCoreVC = "showCoreVC"
     }
 }
 
