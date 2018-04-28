@@ -58,5 +58,6 @@ struct Constants {
         static let shadowRadius: CGFloat = 3.0
         static let shadowOpacity: Float = 0.5
         static let spinAnimationDuration: CFTimeInterval = 1.0
+        static let growShrinkAnimationDuration: TimeInterval = 0.1
     }
 }

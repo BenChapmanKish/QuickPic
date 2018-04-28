@@ -83,11 +83,24 @@ class QPButton: UIButton {
     }
     
     @objc func expandButton(_ sender: Any?) {
-        self.widthConstraint.constant = self.normalSize + self.highlightedSizeIncrease
+        self.animateConstraintChange(constant: self.normalSize + self.highlightedSizeIncrease)
     }
     
     @objc func shrinkButton(_ sender: Any?) {
-        self.widthConstraint.constant = self.normalSize
+        self.animateConstraintChange(constant: self.normalSize)
+    }
+    
+    private func animateConstraintChange(constant: CGFloat) {
+        self.superview?.layoutIfNeeded()
+        self.widthConstraint.constant = constant
+        UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: Constants.QPButton.growShrinkAnimationDuration,
+            delay: 0,
+            options: [.curveLinear,
+                      .allowUserInteraction],
+            animations: {
+                self.superview?.layoutIfNeeded()
+        })
     }
 
     

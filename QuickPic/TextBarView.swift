@@ -109,14 +109,14 @@ class TextBarView: UIView {
         guard let superview = self.superview else { return }
         var topConstant = superview.frame.height - self.frame.height - bottomConstant
         topConstant = min(max(0, topConstant), superview.frame.height - self.frame.height)
-        self.animateConstraintChange(constant: topConstant, andBeginEditing: true)
+        self.animateConstraintChange(constant: topConstant)
     }
     
     public func switchToTopConstraint() {
         self.animateConstraintChange(constant: self.position)
     }
     
-    private func animateConstraintChange(constant: CGFloat, andBeginEditing beginEditing: Bool = false) {
+    private func animateConstraintChange(constant: CGFloat) {
         self.superview?.layoutIfNeeded()
         self.topConstraint.constant = constant
         UIViewPropertyAnimator.runningPropertyAnimator(
