@@ -52,6 +52,10 @@ class SignInViewController: UIViewController {
         }
         self.present(authVC, animated: true)
     }
+    
+    @IBAction func unwindToSignIn(segue: UIStoryboardSegue) {
+        // No-op
+    }
 }
 
 extension SignInViewController: FUIAuthDelegate {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuthUI
 
 class ProfileViewController: UIViewController {
 
@@ -31,5 +32,14 @@ class ProfileViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    @IBAction func signOutButtonTapped(_ sender: UIButton) {
+        do {
+            try FUIAuth.defaultAuthUI()?.signOut()
+            self.performSegue(withIdentifier: Ids.Segues.unwindToSignIn, sender: self)
+        } catch let error {
+            self.showGenericErrorAlert(withMessage: error.localizedDescription)
+        }
+    }
+    
 }

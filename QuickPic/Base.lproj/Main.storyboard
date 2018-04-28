@@ -63,11 +63,31 @@
                     <view key="view" contentMode="scaleToFill" id="Zv3-Iv-jzg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZkI-nZ-ZDe">
+                                <rect key="frame" x="299" y="38" width="60" height="30"/>
+                                <state key="normal" title="Sign Out">
+                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="signOutButtonTapped:" destination="oVp-DP-CCu" eventType="touchUpInside" id="VWF-9Q-5Yf"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZkI-nZ-ZDe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Zv3-Iv-jzg" secondAttribute="leading" constant="20" symbolic="YES" id="H4z-uo-g66"/>
+                            <constraint firstItem="LDs-R9-qc8" firstAttribute="trailing" secondItem="ZkI-nZ-ZDe" secondAttribute="trailing" constant="16" id="Yya-4P-ECr"/>
+                            <constraint firstItem="ZkI-nZ-ZDe" firstAttribute="top" secondItem="LDs-R9-qc8" secondAttribute="top" constant="18" id="cBV-9h-aqX"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="LDs-R9-qc8"/>
                     </view>
+                    <connections>
+                        <segue destination="V4H-QM-L58" kind="unwind" identifier="unwindToSignIn" unwindAction="unwindToSignInSegue:" id="R6V-F3-du9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wrx-ad-6Hd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="V4H-QM-L58" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1455" y="834"/>
         </scene>
