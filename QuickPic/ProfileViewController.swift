@@ -10,9 +10,17 @@ import UIKit
 import FirebaseAuthUI
 
 class ProfileViewController: UIViewController {
-
+    
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var statsLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard let user = QPUser.loggedInUser else { return }
+        
+        self.nameLabel.text = user.name
+        self.statsLabel.text = "Sent: \(user.totalPicsSent) | Received: \(user.totalPicsReceived)"
 
         // Do any additional setup after loading the view.
     }
@@ -35,7 +43,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func signOutButtonTapped(_ sender: UIButton) {
         do {
-            try FUIAuth.defaultAuthUI()?.signOut()
+            try QPUser.logout()
             self.performSegue(withIdentifier: Ids.Segues.unwindToSignIn, sender: self)
         } catch let error {
             self.showGenericErrorAlert(withMessage: error.localizedDescription)

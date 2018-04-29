@@ -63,4 +63,11 @@ struct Constants {
         static let spinAnimationDuration: CFTimeInterval = 1.0
         static let growShrinkAnimationDuration: TimeInterval = 0.1
     }
+    
+    struct PaddedTextButton {
+        static let cornerRadius: CGFloat = 5.0
+        static let shadowRadius: CGFloat = 3.0
+        static let shadowOpacity: Float = 0.5
+        static let edgeInset: CGFloat = 12.0
+    }
 }

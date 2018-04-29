@@ -17,6 +17,7 @@ class CorePageViewController: UIPageViewController {
         
         self.setViewControllers([self.orderedViewControllers[1]], direction: .forward, animated: true, completion: nil)
         
+        // TODO: pick an app-wide background colour and make it a constant
         self.view.backgroundColor = .white
 
         // Do any additional setup after loading the view.

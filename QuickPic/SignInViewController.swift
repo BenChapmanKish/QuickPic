@@ -25,24 +25,15 @@ class SignInViewController: UIViewController {
         self.authUI = FUIAuth.defaultAuthUI()
         self.authUI?.delegate = self
         self.authUI?.providers = [FUIGoogleAuth()]
-        
-        self.configureSignInButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if Auth.auth().currentUser != nil {
+        QPUser.loginFromFirebaseUserIfPossible()
+        if QPUser.loggedInUser != nil {
             self.performSegue(withIdentifier: Ids.Segues.showCoreVC, sender: self)
         }
-    }
-    
-    private func configureSignInButton() {
-        self.signInButton.layer.cornerRadius = 5.0
-        self.signInButton.layer.shadowColor = UIColor.black.cgColor
-        self.signInButton.layer.shadowOpacity = 0.5
-        self.signInButton.layer.shadowRadius = 5.0
-        self.signInButton.contentEdgeInsets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
     }
     
     @IBAction func signInButtonTapped(_ sender: UIButton) {
@@ -66,7 +57,5 @@ extension SignInViewController: FUIAuthDelegate {
             }
             return
         }
-        
-        self.performSegue(withIdentifier: Ids.Segues.showCoreVC, sender: self)
     }
 }

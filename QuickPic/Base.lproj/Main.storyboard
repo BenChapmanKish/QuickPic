@@ -20,8 +20,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uhy-SW-2mq">
-                                <rect key="frame" x="157.5" y="166" width="60" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uhy-SW-2mq" customClass="PaddedTextButton" customModule="QuickPic" customModuleProvider="target">
+                                <rect key="frame" x="157.5" y="216.5" width="60" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Sign In">
@@ -31,11 +31,19 @@
                                     <action selector="signInButtonTapped:" destination="NY7-Fo-u5e" eventType="touchUpInside" id="Cj2-gU-vA9"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QuickPic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fB-Qy-OHm">
+                                <rect key="frame" x="105" y="95" width="165" height="50.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="42"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="0.6393890884696849" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="Uhy-SW-2mq" firstAttribute="top" secondItem="CrG-ep-8R0" secondAttribute="top" constant="146" id="96O-Yw-1rs"/>
+                            <constraint firstItem="Uhy-SW-2mq" firstAttribute="top" secondItem="5fB-Qy-OHm" secondAttribute="bottom" constant="71" id="96O-Yw-1rs"/>
                             <constraint firstItem="Uhy-SW-2mq" firstAttribute="centerX" secondItem="CrG-ep-8R0" secondAttribute="centerX" id="BOz-VC-Tbl"/>
+                            <constraint firstItem="5fB-Qy-OHm" firstAttribute="centerX" secondItem="CrG-ep-8R0" secondAttribute="centerX" id="az3-Rl-LOR"/>
+                            <constraint firstItem="5fB-Qy-OHm" firstAttribute="top" secondItem="CrG-ep-8R0" secondAttribute="top" constant="75" id="vmo-lo-n3e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CrG-ep-8R0"/>
                     </view>
@@ -46,7 +54,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4VX-Bk-I0L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-87" y="121"/>
+            <point key="canvasLocation" x="686" y="-589"/>
         </scene>
         <!--Core Page View Controller-->
         <scene sceneID="llY-yH-Ze4">
@@ -73,17 +81,35 @@
                                     <action selector="signOutButtonTapped:" destination="oVp-DP-CCu" eventType="touchUpInside" id="VWF-9Q-5Yf"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt; Name &gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7T-vg-EPg">
+                                <rect key="frame" x="137" y="149" width="102" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt; Stats &gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfN-gV-w5K">
+                                <rect key="frame" x="153" y="193" width="70" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="JfN-gV-w5K" firstAttribute="centerX" secondItem="k7T-vg-EPg" secondAttribute="centerX" id="6GF-N7-emT"/>
+                            <constraint firstItem="k7T-vg-EPg" firstAttribute="centerX" secondItem="LDs-R9-qc8" secondAttribute="centerX" id="7ss-Bu-XAG"/>
                             <constraint firstItem="ZkI-nZ-ZDe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Zv3-Iv-jzg" secondAttribute="leading" constant="20" symbolic="YES" id="H4z-uo-g66"/>
+                            <constraint firstItem="k7T-vg-EPg" firstAttribute="top" secondItem="LDs-R9-qc8" secondAttribute="top" constant="129" id="K6E-5W-PwX"/>
+                            <constraint firstItem="JfN-gV-w5K" firstAttribute="top" secondItem="k7T-vg-EPg" secondAttribute="bottom" constant="15" id="Tsq-O7-MIP"/>
                             <constraint firstItem="LDs-R9-qc8" firstAttribute="trailing" secondItem="ZkI-nZ-ZDe" secondAttribute="trailing" constant="16" id="Yya-4P-ECr"/>
                             <constraint firstItem="ZkI-nZ-ZDe" firstAttribute="top" secondItem="LDs-R9-qc8" secondAttribute="top" constant="18" id="cBV-9h-aqX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LDs-R9-qc8"/>
                     </view>
                     <connections>
-                        <segue destination="V4H-QM-L58" kind="unwind" identifier="unwindToSignIn" unwindAction="unwindToSignInSegue:" id="R6V-F3-du9"/>
+                        <outlet property="nameLabel" destination="k7T-vg-EPg" id="MpG-jd-Qt5"/>
+                        <outlet property="statsLabel" destination="JfN-gV-w5K" id="LI9-7E-P2H"/>
+                        <segue destination="V4H-QM-L58" kind="unwind" identifier="unwindToSignIn" animates="NO" unwindAction="unwindToSignInSegue:" id="R6V-F3-du9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wrx-ad-6Hd" userLabel="First Responder" sceneMemberID="firstResponder"/>
