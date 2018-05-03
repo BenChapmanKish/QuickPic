@@ -73,7 +73,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZkI-nZ-ZDe">
-                                <rect key="frame" x="299" y="38" width="60" height="30"/>
+                                <rect key="frame" x="299" y="33" width="60" height="30"/>
                                 <state key="normal" title="Sign Out">
                                     <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -100,16 +100,24 @@
                                     <action selector="editButtonTapped:" destination="oVp-DP-CCu" eventType="touchUpInside" id="Eaw-A9-ucB"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXM-Xp-6y2">
+                                <rect key="frame" x="147" y="30" width="81.5" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="JfN-gV-w5K" firstAttribute="centerX" secondItem="k7T-vg-EPg" secondAttribute="centerX" id="6GF-N7-emT"/>
                             <constraint firstItem="k7T-vg-EPg" firstAttribute="centerX" secondItem="LDs-R9-qc8" secondAttribute="centerX" id="7ss-Bu-XAG"/>
-                            <constraint firstItem="ZkI-nZ-ZDe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Zv3-Iv-jzg" secondAttribute="leading" constant="20" symbolic="YES" id="H4z-uo-g66"/>
+                            <constraint firstItem="ZkI-nZ-ZDe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CXM-Xp-6y2" secondAttribute="trailing" id="H4z-uo-g66"/>
                             <constraint firstItem="k7T-vg-EPg" firstAttribute="top" secondItem="LDs-R9-qc8" secondAttribute="top" constant="129" id="K6E-5W-PwX"/>
+                            <constraint firstItem="CXM-Xp-6y2" firstAttribute="top" secondItem="LDs-R9-qc8" secondAttribute="top" constant="10" id="MeG-8l-EgF"/>
+                            <constraint firstItem="ZkI-nZ-ZDe" firstAttribute="centerY" secondItem="CXM-Xp-6y2" secondAttribute="centerY" id="Try-ck-wrw"/>
                             <constraint firstItem="JfN-gV-w5K" firstAttribute="top" secondItem="Fnk-vm-HeI" secondAttribute="bottom" constant="30" id="Tsq-O7-MIP"/>
                             <constraint firstItem="LDs-R9-qc8" firstAttribute="trailing" secondItem="ZkI-nZ-ZDe" secondAttribute="trailing" constant="16" id="Yya-4P-ECr"/>
-                            <constraint firstItem="ZkI-nZ-ZDe" firstAttribute="top" secondItem="LDs-R9-qc8" secondAttribute="top" constant="18" id="cBV-9h-aqX"/>
+                            <constraint firstItem="CXM-Xp-6y2" firstAttribute="centerX" secondItem="LDs-R9-qc8" secondAttribute="centerX" id="k4F-28-SLu"/>
                             <constraint firstItem="Fnk-vm-HeI" firstAttribute="top" secondItem="k7T-vg-EPg" secondAttribute="bottom" id="lMS-Uc-ywi"/>
                             <constraint firstItem="Fnk-vm-HeI" firstAttribute="centerX" secondItem="k7T-vg-EPg" secondAttribute="centerX" id="tfh-dU-YeS"/>
                         </constraints>
@@ -133,7 +141,19 @@
                     <view key="view" contentMode="scaleToFill" id="KNb-vK-Zyo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inbox" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kY1-ha-9Dr">
+                                <rect key="frame" x="152.5" y="30" width="71" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="0.45009386540000001" green="0.98132258650000004" blue="0.4743030667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="kY1-ha-9Dr" firstAttribute="centerX" secondItem="oSM-4Z-NxO" secondAttribute="centerX" id="Lqh-0t-x88"/>
+                            <constraint firstItem="kY1-ha-9Dr" firstAttribute="top" secondItem="oSM-4Z-NxO" secondAttribute="top" constant="10" id="t1u-tY-Noz"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="oSM-4Z-NxO"/>
                     </view>
                 </viewController>
