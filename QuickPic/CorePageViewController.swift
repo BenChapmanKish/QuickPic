@@ -9,16 +9,27 @@
 import UIKit
 
 class CorePageViewController: UIPageViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.dataSource = self
+        self.delegate = self
         
         self.setViewControllers([self.orderedViewControllers[1]], direction: .forward, animated: true, completion: nil)
         
         // TODO: pick an app-wide background colour and make it a constant
         self.view.backgroundColor = .white
+    }
+    
+    // Update background colors
+    override func setViewControllers(_ viewControllers: [UIViewController]?, direction: UIPageViewControllerNavigationDirection, animated: Bool, completion: ((Bool) -> Void)? = nil) {
+        super.setViewControllers(viewControllers, direction: direction, animated: animated, completion: completion)
+        
+        guard let viewController = viewControllers?.first else {
+            return
+        }
+        
+        self.view.backgroundColor = viewController.view.backgroundColor
     }
     
     private(set) lazy var orderedViewControllers: [UIViewController] = {
@@ -60,5 +71,16 @@ extension CorePageViewController: UIPageViewControllerDataSource {
         }
         
         return self.orderedViewControllers[nextIndex]
+    }
+}
+
+extension CorePageViewController: UIPageViewControllerDelegate {
+    // Update background colors
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        
+        guard completed,
+            let viewController = pageViewController.viewControllers?.last else { return }
+        
+        self.view.backgroundColor = viewController.view.backgroundColor
     }
 }
