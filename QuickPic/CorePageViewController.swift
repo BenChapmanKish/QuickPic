@@ -19,37 +19,19 @@ class CorePageViewController: UIPageViewController {
         
         // TODO: pick an app-wide background colour and make it a constant
         self.view.backgroundColor = .white
-
-        // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
     
     private(set) lazy var orderedViewControllers: [UIViewController] = {
+        let storyboard = UIStoryboard(name: Ids.Identifiers.mainStoryboard, bundle: nil)
         return [
-            UIStoryboard(name: Ids.Identifiers.mainStoryboard, bundle: nil).instantiateViewController(withIdentifier: Ids.Identifiers.inboxVC),
-            UIStoryboard(name: Ids.Identifiers.mainStoryboard, bundle: nil).instantiateViewController(withIdentifier: Ids.Identifiers.cameraVC),
-            UIStoryboard(name: Ids.Identifiers.mainStoryboard, bundle: nil).instantiateViewController(withIdentifier: Ids.Identifiers.profileVC)
+            storyboard.instantiateViewController(withIdentifier: Ids.Identifiers.inboxVC),
+            storyboard.instantiateViewController(withIdentifier: Ids.Identifiers.cameraVC),
+            storyboard.instantiateViewController(withIdentifier: Ids.Identifiers.profileVC)
         ]
     }()
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
 
 extension CorePageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -59,8 +41,7 @@ extension CorePageViewController: UIPageViewControllerDataSource {
         
         let previousIndex = viewControllerIndex - 1
         
-        guard previousIndex >= 0,
-            self.orderedViewControllers.count > previousIndex else {
+        guard previousIndex >= 0 && previousIndex < self.orderedViewControllers.count else {
             return nil
         }
         
@@ -73,10 +54,8 @@ extension CorePageViewController: UIPageViewControllerDataSource {
         }
         
         let nextIndex = viewControllerIndex + 1
-        let orderedViewControllersCount = self.orderedViewControllers.count
         
-        guard orderedViewControllersCount != nextIndex,
-            orderedViewControllersCount > nextIndex else {
+        guard nextIndex >= 0 && nextIndex < self.orderedViewControllers.count else {
             return nil
         }
         
