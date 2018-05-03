@@ -21,4 +21,23 @@ extension UIViewController {
     func showGenericErrorAlert(withMessage message: String? = nil) {
         self.showAlertWithOkButton(title: UserFacingStrings.Errors.genericErrorTitle, message: message)
     }
+    
+    func showActivityIndicator() -> UIActivityIndicatorView {
+        let indicatorView = UIActivityIndicatorView(frame: self.view.bounds)
+        
+        indicatorView.center = self.view.center
+        
+        indicatorView.activityIndicatorViewStyle = .whiteLarge
+        indicatorView.startAnimating()
+        
+        DispatchQueue.main.async {
+            self.view.addSubview(indicatorView)
+        }
+        
+        return indicatorView
+    }
+    
+    func hideActivityIndicator(_ indicatorView: UIActivityIndicatorView) {
+        indicatorView.removeFromSuperview()
+    }
 }

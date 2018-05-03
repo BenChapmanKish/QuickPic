@@ -36,9 +36,9 @@ class QPUser {
         self.firebaseUser = firebaseUser
     }
     
-    public func updateUser(displayName: String, callback: UserProfileChangeCallback? = nil) {
+    public func changeUserName(to newName: String, callback: UserProfileChangeCallback? = nil) {
         let changeRequest = self.firebaseUser.createProfileChangeRequest()
-        changeRequest.displayName = displayName
+        changeRequest.displayName = newName
         changeRequest.commitChanges(completion: callback)
     }
     

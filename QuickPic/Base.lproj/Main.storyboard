@@ -88,11 +88,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt; Stats &gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfN-gV-w5K">
-                                <rect key="frame" x="153" y="193" width="70" height="21"/>
+                                <rect key="frame" x="153" y="238" width="70" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fnk-vm-HeI">
+                                <rect key="frame" x="173" y="178" width="30" height="30"/>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="editButtonTapped:" destination="oVp-DP-CCu" eventType="touchUpInside" id="Eaw-A9-ucB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -100,9 +107,11 @@
                             <constraint firstItem="k7T-vg-EPg" firstAttribute="centerX" secondItem="LDs-R9-qc8" secondAttribute="centerX" id="7ss-Bu-XAG"/>
                             <constraint firstItem="ZkI-nZ-ZDe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Zv3-Iv-jzg" secondAttribute="leading" constant="20" symbolic="YES" id="H4z-uo-g66"/>
                             <constraint firstItem="k7T-vg-EPg" firstAttribute="top" secondItem="LDs-R9-qc8" secondAttribute="top" constant="129" id="K6E-5W-PwX"/>
-                            <constraint firstItem="JfN-gV-w5K" firstAttribute="top" secondItem="k7T-vg-EPg" secondAttribute="bottom" constant="15" id="Tsq-O7-MIP"/>
+                            <constraint firstItem="JfN-gV-w5K" firstAttribute="top" secondItem="Fnk-vm-HeI" secondAttribute="bottom" constant="30" id="Tsq-O7-MIP"/>
                             <constraint firstItem="LDs-R9-qc8" firstAttribute="trailing" secondItem="ZkI-nZ-ZDe" secondAttribute="trailing" constant="16" id="Yya-4P-ECr"/>
                             <constraint firstItem="ZkI-nZ-ZDe" firstAttribute="top" secondItem="LDs-R9-qc8" secondAttribute="top" constant="18" id="cBV-9h-aqX"/>
+                            <constraint firstItem="Fnk-vm-HeI" firstAttribute="top" secondItem="k7T-vg-EPg" secondAttribute="bottom" id="lMS-Uc-ywi"/>
+                            <constraint firstItem="Fnk-vm-HeI" firstAttribute="centerX" secondItem="k7T-vg-EPg" secondAttribute="centerX" id="tfh-dU-YeS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LDs-R9-qc8"/>
                     </view>
