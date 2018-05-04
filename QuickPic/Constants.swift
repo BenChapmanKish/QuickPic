@@ -22,6 +22,15 @@ struct Ids {
         static let showCoreVC = "showCoreVC"
         static let unwindToSignIn = "unwindToSignIn"
     }
+    
+    struct DatabaseKeys {
+        static let usersCollection = "users"
+        static let uidKey = "uid"
+        static let displayNameKey = "displayName"
+        static let picsSentKey = "totalPicsSent"
+        static let picsReceivedKey = "totalPicsReceived"
+        static let friendsListKey = "listOfFriendUIDs"
+    }
 }
 
 struct UserFacingStrings {
@@ -29,6 +38,8 @@ struct UserFacingStrings {
         static let genericErrorTitle = "An error happened"
         static let couldNotSaveImage = "We couldn't save the image to your camera roll!"
         static let couldNotOpenLoginFlow = "We couldn't open the sign in screen!"
+        static let couldNotRetrieveUserData = "We couldn't retrieve your data from the server!"
+        static let couldNotCreateAccount = "We couldn't create your account!"
     }
 }
 struct UserDefaultsKeys {

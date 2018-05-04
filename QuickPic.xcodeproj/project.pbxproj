@@ -24,6 +24,7 @@
 		B587483020904F2900FF8684 /* TextBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B587482F20904F2900FF8684 /* TextBarView.swift */; };
 		B58748372094077300FF8684 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B58748362094077300FF8684 /* GoogleService-Info.plist */; };
 		B58748392094158500FF8684 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58748382094158500FF8684 /* SignInViewController.swift */; };
+		B597F202209BE44000704391 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B597F201209BE44000704391 /* FirebaseManager.swift */; };
 		B59BA6222086F178005B66CB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59BA6212086F178005B66CB /* CameraViewController.swift */; };
 		B59BA6262086F716005B66CB /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */; };
 		B5D05283208EAFFB00BD3802 /* UIView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D05282208EAFFB00BD3802 /* UIView+Helpers.swift */; };
@@ -62,6 +63,7 @@
 		B587482F20904F2900FF8684 /* TextBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBarView.swift; sourceTree = "<group>"; };
 		B58748362094077300FF8684 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B58748382094158500FF8684 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		B597F201209BE44000704391 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		B59BA6212086F178005B66CB /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		B59BA6252086F716005B66CB /* UIViewController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helpers.swift"; sourceTree = "<group>"; };
 		B5D05282208EAFFB00BD3802 /* UIView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Helpers.swift"; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				B583A2062086CED0002C4EA7 /* CorePageViewController.swift */,
 				B567215920942DE3008D032E /* ProfileViewController.swift */,
 				B567215B20942DEF008D032E /* Camera */,
+				B597F201209BE44000704391 /* FirebaseManager.swift */,
 				B567216220957427008D032E /* QPUser.swift */,
 				B5D05288208EEC5A00BD3802 /* IconButton.swift */,
 				B567215E2095279F008D032E /* PaddedTextButton.swift */,
@@ -284,16 +287,30 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-QuickPic/Pods-QuickPic-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,6 +395,7 @@
 				B547E46A208DA56600FBF67B /* Constants.swift in Sources */,
 				B587483020904F2900FF8684 /* TextBarView.swift in Sources */,
 				B59BA6222086F178005B66CB /* CameraViewController.swift in Sources */,
+				B597F202209BE44000704391 /* FirebaseManager.swift in Sources */,
 				B5D05289208EEC5A00BD3802 /* IconButton.swift in Sources */,
 				B547E466208D97A900FBF67B /* EditPicViewController.swift in Sources */,
 			);

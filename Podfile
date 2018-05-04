@@ -10,6 +10,7 @@ target 'QuickPic' do
   pod 'Firebase/Core'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Google'
+  pod 'Firebase/Firestore'
 
   target 'QuickPicTests' do
     inherit! :search_paths

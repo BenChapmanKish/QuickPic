@@ -17,7 +17,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let user = QPUser.loggedInUser else { return }
+        guard let user = QPLoginUser.loggedInUser else { return }
         
         self.nameLabel.text = user.name
         self.statsLabel.text = "Sent: \(user.totalPicsSent) | Received: \(user.totalPicsReceived)"
@@ -46,7 +46,7 @@ class ProfileViewController: UIViewController {
     }
     
     private func showEditAlert() {
-        guard let user = QPUser.loggedInUser else { return }
+        guard let user = QPLoginUser.loggedInUser else { return }
         
         let alert = UIAlertController(title: "Enter name", message: nil, preferredStyle: .alert)
         
@@ -65,7 +65,7 @@ class ProfileViewController: UIViewController {
             handler: { action in
                 guard let newName = alert.textFields?[0].text else { return }
                 
-                self.attemptToChangeUserName(to: newName)
+                self.attemptToChangeName(to: newName)
         })
         
         alert.addAction(cancelAction)
@@ -73,10 +73,10 @@ class ProfileViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    private func attemptToChangeUserName(to newName: String) {
+    private func attemptToChangeName(to newName: String) {
         let activityIndicator = self.showActivityIndicator()
         
-        QPUser.loggedInUser?.changeUserName(
+        QPLoginUser.loggedInUser?.changeDisplayName(
             to: newName,
             callback: { error in
                 self.hideActivityIndicator(activityIndicator)
@@ -92,9 +92,9 @@ class ProfileViewController: UIViewController {
     
     @IBAction func signOutButtonTapped(_ sender: UIButton) {
         do {
-            try QPUser.logout()
+            try QPLoginUser.logout()
             self.performSegue(withIdentifier: Ids.Segues.unwindToSignIn, sender: self)
-        } catch let error {
+        } catch {
             self.showGenericErrorAlert(withMessage: error.localizedDescription)
         }
     }

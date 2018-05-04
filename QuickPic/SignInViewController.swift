@@ -30,8 +30,13 @@ class SignInViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        QPUser.loginFromFirebaseUserIfPossible()
-        if QPUser.loggedInUser != nil {
+        do {
+            try QPLoginUser.loginUserIfPossible()
+        } catch {
+            self.showGenericErrorAlert(withMessage: error.localizedDescription)
+        }
+        
+        if QPLoginUser.loggedInUser != nil {
             self.performSegue(withIdentifier: Ids.Segues.showCoreVC, sender: self)
         }
     }

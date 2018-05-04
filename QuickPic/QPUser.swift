@@ -11,14 +11,78 @@ import FirebaseAuth
 import FirebaseAuthUI
 
 class QPUser {
+    fileprivate var userData: UserData
     
-    public static var loggedInUser: QPUser?
+    init(userData: UserData) {
+        self.userData = userData
+    }
     
-    public static func loginFromFirebaseUserIfPossible() {
+    public static func lookupUser(uid: String, completion: @escaping (QPUser?) -> Void) {
+        FirebaseManager.lookupUser(uid: uid) { (error, userData) in
+            guard error == nil,
+                let userData = userData else {
+                completion(nil)
+                return
+            }
+            completion(QPUser(userData: userData))
+        }
+    }
+    
+    
+    public var name: String {
+        return self.userData.displayName
+    }
+    
+    public var totalPicsSent: Int {
+        return self.userData.totalPicsSent
+    }
+    
+    public var totalPicsReceived: Int {
+        return self.userData.totalPicsReceived
+    }
+}
+
+class QPLoginUser: QPUser {
+    public static var loggedInUser: QPLoginUser?
+    
+    private static func createNewUserIfPossible() throws {
         guard let firebaseUser = Auth.auth().currentUser,
             self.loggedInUser == nil else { return }
         
-        self.loggedInUser = QPUser(firebaseUser: firebaseUser)
+        do {
+            let userData = try FirebaseManager.createUser(fromFirebaseUser: firebaseUser)
+            self.loggedInUser = QPLoginUser(firebaseUser: firebaseUser, userData: userData)
+        } catch {
+            throw error
+        }
+    }
+    
+    public static func loginUserIfPossible() throws {
+        guard let firebaseUser = Auth.auth().currentUser,
+            self.loggedInUser == nil else { return }
+        
+        var requestError: Error?
+        
+        FirebaseManager.lookupUser(uid: firebaseUser.uid) { (error, userData) in
+            if error != nil {
+                requestError = error
+                return
+            }
+            
+            if let userData = userData {
+                self.loggedInUser = QPLoginUser(firebaseUser: firebaseUser, userData: userData)
+            } else {
+                do {
+                    try self.createNewUserIfPossible()
+                } catch {
+                    requestError = error
+                }
+            }
+        }
+        
+        if let error = requestError {
+            throw error
+        }
     }
     
     public static func logout() throws {
@@ -27,31 +91,44 @@ class QPUser {
     }
     
     
-    private var firebaseUser: User!
     
-    private var _totalPicsSent: UInt = 0
-    private var _totalPicsReceived: UInt = 0
+    private var firebaseUser: User
     
-    init(firebaseUser: User) {
+    init(firebaseUser: User, userData: UserData) {
         self.firebaseUser = firebaseUser
+        super.init(userData: userData)
     }
     
-    public func changeUserName(to newName: String, callback: UserProfileChangeCallback? = nil) {
+    public func changeDisplayName(to newName: String, callback: UserProfileChangeCallback? = nil) {
         let changeRequest = self.firebaseUser.createProfileChangeRequest()
         changeRequest.displayName = newName
-        changeRequest.commitChanges(completion: callback)
+        changeRequest.commitChanges { error in
+            if error == nil {
+                self.userData.changeDisplayName(to: newName, completion: { error in
+                    callback?(error)
+                })
+            } else {
+                callback?(error)
+            }
+        }
     }
     
-    
-    public var name: String {
-        return self.firebaseUser.displayName ?? self.firebaseUser.uid
-    }
-    
-    public var totalPicsSent: Int {
-        return Int(self._totalPicsSent)
-    }
-    
-    public var totalPicsReceived: Int {
-        return Int(self._totalPicsReceived)
+    public func getFriends(completion: @escaping ([QPUser]) -> Void) {
+        var friends = [QPUser]()
+        var friendsFetched = 0
+        
+        self.userData.friends.forEach { uid in
+            QPUser.lookupUser(uid: uid, completion: { user in
+                friendsFetched += 1
+                
+                if let user = user {
+                    friends.append(user)
+                }
+                
+                if friendsFetched == friends.count {
+                    completion(friends)
+                }
+            })
+        }
     }
 }
