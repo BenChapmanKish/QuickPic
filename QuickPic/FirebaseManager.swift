@@ -52,22 +52,23 @@ class FirebaseManager {
         return FirebaseManager.db.collection(Ids.DatabaseKeys.usersCollection)
     }()
     
-    public static func createUser(fromFirebaseUser firebaseUser: User) throws -> UserData {
+    public static func createUser(fromFirebaseUser firebaseUser: User, completion: @escaping (Error?, UserData) -> Void) {
         let userData = UserData(uid: firebaseUser.uid, displayName: firebaseUser.displayName)
         
-        var requestError: Error?
-        var userExists = false
+        var canContinueWithCreatingUser = true
         
         self.usersCollection.document(userData.uid).getDocument { (snapshot, error) in
-            requestError = error
-            userExists = (snapshot != nil)
+            if error != nil {
+                completion(error, userData)
+                canContinueWithCreatingUser = false
+            } else if snapshot != nil {
+                let error = NSError(domain: "FirebaseManager", code: 1, userInfo: [NSLocalizedDescriptionKey: UserFacingStrings.Errors.couldNotCreateAccount])
+                completion(error, userData)
+                canContinueWithCreatingUser = false
+            }
         }
         
-        if let error = requestError {
-            throw error
-        } else if userExists {
-            throw NSError(domain: "FirebaseManager", code: 1, userInfo: [NSLocalizedDescriptionKey: UserFacingStrings.Errors.couldNotCreateAccount])
-        }
+        guard canContinueWithCreatingUser else { return }
         
         self.usersCollection.document(userData.uid).setData([
             Ids.DatabaseKeys.displayNameKey : userData.displayName,
@@ -75,14 +76,8 @@ class FirebaseManager {
             Ids.DatabaseKeys.picsReceivedKey : userData.totalPicsReceived,
             Ids.DatabaseKeys.friendsListKey : userData.friends
         ], completion: { error in
-            requestError = error
+            completion(error, userData)
         })
-        
-        if let error = requestError {
-            throw error
-        }
-        
-        return userData
     }
     
     public static func lookupUser(uid: String, completion: @escaping ((Error?, UserData?) -> Void)) {

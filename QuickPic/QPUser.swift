@@ -45,43 +45,51 @@ class QPUser {
 class QPLoginUser: QPUser {
     public static var loggedInUser: QPLoginUser?
     
-    private static func createNewUserIfPossible() throws {
+    private static func createNewUserIfPossible(completion: @escaping (Error?) -> Void) {
         guard let firebaseUser = Auth.auth().currentUser,
-            self.loggedInUser == nil else { return }
+            self.loggedInUser == nil else {
+                let error = NSError(domain: "QPUser", code: 2, userInfo: [NSLocalizedDescriptionKey : UserFacingStrings.Errors.couldNotCreateAccount])
+                completion(error)
+                return
+        }
         
-        do {
-            let userData = try FirebaseManager.createUser(fromFirebaseUser: firebaseUser)
+        FirebaseManager.createUser(fromFirebaseUser: firebaseUser) { error, userData in
+            guard error == nil else {
+                completion(error)
+                return
+            }
+            
             self.loggedInUser = QPLoginUser(firebaseUser: firebaseUser, userData: userData)
-        } catch {
-            throw error
+            completion(nil)
         }
     }
     
-    public static func loginUserIfPossible() throws {
+    public static func loginUser(completion: @escaping (Error?, QPLoginUser?) -> Void) {
         guard let firebaseUser = Auth.auth().currentUser,
-            self.loggedInUser == nil else { return }
-        
-        var requestError: Error?
+            self.loggedInUser == nil else {
+                completion(nil, nil)
+                return
+        }
         
         FirebaseManager.lookupUser(uid: firebaseUser.uid) { (error, userData) in
-            if error != nil {
-                requestError = error
+            guard error == nil else {
+                completion(error, nil)
                 return
             }
             
             if let userData = userData {
                 self.loggedInUser = QPLoginUser(firebaseUser: firebaseUser, userData: userData)
+                completion(nil, self.loggedInUser)
             } else {
-                do {
-                    try self.createNewUserIfPossible()
-                } catch {
-                    requestError = error
-                }
+                self.createNewUserIfPossible(completion: { error in
+                    guard error == nil else {
+                        completion(error, nil)
+                        return
+                    }
+                    
+                    completion(nil, self.loggedInUser)
+                })
             }
-        }
-        
-        if let error = requestError {
-            throw error
         }
     }
     
@@ -93,6 +101,7 @@ class QPLoginUser: QPUser {
     
     
     private var firebaseUser: User
+    private var friends: [String : QPUser] = [:]
     
     init(firebaseUser: User, userData: UserData) {
         self.firebaseUser = firebaseUser
@@ -113,20 +122,11 @@ class QPLoginUser: QPUser {
         }
     }
     
-    public func getFriends(completion: @escaping ([QPUser]) -> Void) {
-        var friends = [QPUser]()
-        var friendsFetched = 0
-        
+    public func updateFriends() {
         self.userData.friends.forEach { uid in
             QPUser.lookupUser(uid: uid, completion: { user in
-                friendsFetched += 1
-                
                 if let user = user {
-                    friends.append(user)
-                }
-                
-                if friendsFetched == friends.count {
-                    completion(friends)
+                    self.friends[uid] = user
                 }
             })
         }

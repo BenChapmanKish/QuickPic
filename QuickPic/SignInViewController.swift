@@ -11,8 +11,6 @@ import UIKit
 import FirebaseAuthUI
 import FirebaseGoogleAuthUI
 
-// This entire page is a WIP, both in code and appearance
-
 class SignInViewController: UIViewController {
 
     @IBOutlet var signInButton: UIButton!
@@ -30,15 +28,20 @@ class SignInViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        do {
-            try QPLoginUser.loginUserIfPossible()
-        } catch {
-            self.showGenericErrorAlert(withMessage: error.localizedDescription)
-        }
+        let activityIndicator = self.showActivityIndicator()
         
-        if QPLoginUser.loggedInUser != nil {
-            self.performSegue(withIdentifier: Ids.Segues.showCoreVC, sender: self)
-        }
+        QPLoginUser.loginUser(completion: { (error, loginUser) in
+            self.hideActivityIndicator(activityIndicator)
+            
+            if let error = error {
+                self.showGenericErrorAlert(withMessage: error.localizedDescription)
+                return
+            }
+            
+            if loginUser != nil {
+                self.performSegue(withIdentifier: Ids.Segues.showCoreVC, sender: self)
+            }
+        })
     }
     
     @IBAction func signInButtonTapped(_ sender: UIButton) {

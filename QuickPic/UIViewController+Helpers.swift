@@ -26,8 +26,9 @@ extension UIViewController {
         let indicatorView = UIActivityIndicatorView(frame: self.view.bounds)
         
         indicatorView.center = self.view.center
-        
+        indicatorView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4)
         indicatorView.activityIndicatorViewStyle = .whiteLarge
+        indicatorView.hidesWhenStopped = true
         indicatorView.startAnimating()
         
         DispatchQueue.main.async {
@@ -38,6 +39,7 @@ extension UIViewController {
     }
     
     func hideActivityIndicator(_ indicatorView: UIActivityIndicatorView) {
+        indicatorView.stopAnimating()
         indicatorView.removeFromSuperview()
     }
 }
