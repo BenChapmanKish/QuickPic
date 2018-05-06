@@ -30,7 +30,7 @@ class SignInViewController: UIViewController {
         
         let activityIndicator = self.showActivityIndicator()
         
-        QPLoginUser.loginUser(completion: { (error, loginUser) in
+        QPLoginUser.loginUser(completion: { (error, loginResult) in
             self.hideActivityIndicator(activityIndicator)
             
             if let error = error {
@@ -38,8 +38,13 @@ class SignInViewController: UIViewController {
                 return
             }
             
-            if loginUser != nil {
+            switch loginResult {
+            case .needMoreInfo:
+                self.performSegue(withIdentifier: Ids.Segues.showSignUpMoreInfoVC, sender: self)
+            case .success, .alreadyLoggedIn:
                 self.performSegue(withIdentifier: Ids.Segues.showCoreVC, sender: self)
+            default:
+                break
             }
         })
     }
@@ -63,7 +68,6 @@ extension SignInViewController: FUIAuthDelegate {
             if !(error._domain == FUIAuthErrorDomain && error._code == FUIAuthErrorCode.userCancelledSignIn.rawValue) {
                 self.showGenericErrorAlert(withMessage: error.localizedDescription)
             }
-            return
         }
     }
 }

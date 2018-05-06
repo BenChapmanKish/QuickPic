@@ -11,28 +11,34 @@ import Firebase
 
 class UserData {
     var uid: String
+    var username: String
+    var birthday: Date
     var displayName: String
     var totalPicsSent: Int
     var totalPicsReceived: Int
     var friends: [String] // UIDs of friends
     
-    init(uid: String, displayName: String?, totalPicsSent: Int = 0, totalPicsReceived: Int = 0, friends: [String] = []) {
+    init(uid: String, username: String, birthday: Date, displayName: String, totalPicsSent: Int = 0, totalPicsReceived: Int = 0, friends: [String] = []) {
         self.uid = uid
-        self.displayName = displayName ?? uid
+        self.username = username
+        self.birthday = birthday
+        self.displayName = displayName
         self.totalPicsSent = totalPicsSent
         self.totalPicsReceived = totalPicsReceived
         self.friends = friends
     }
     
     convenience init?(uid: String, fromDictionary dictionary: [String : Any]) {
-        guard let displayName = dictionary[Ids.DatabaseKeys.displayNameKey] as? String,
+        guard let username = dictionary[Ids.DatabaseKeys.usernameKey] as? String,
+            let birthday = dictionary[Ids.DatabaseKeys.birthdayKey] as? Date,
+            let displayName = dictionary[Ids.DatabaseKeys.displayNameKey] as? String,
             let picsSent = dictionary[Ids.DatabaseKeys.picsSentKey] as? Int,
             let picsReceived = dictionary[Ids.DatabaseKeys.picsReceivedKey] as? Int,
             let friends = dictionary[Ids.DatabaseKeys.friendsListKey] as? [String] else {
                 return nil
         }
         
-        self.init(uid: uid, displayName: displayName, totalPicsSent: picsSent, totalPicsReceived: picsReceived, friends: friends)
+        self.init(uid: uid, username: username, birthday: birthday, displayName: displayName, totalPicsSent: picsSent, totalPicsReceived: picsReceived, friends: friends)
     }
     
     public func changeDisplayName(to newName: String, completion: ((Error?) -> Void)? = nil) {
@@ -52,25 +58,12 @@ class FirebaseManager {
         return FirebaseManager.db.collection(Ids.DatabaseKeys.usersCollection)
     }()
     
-    public static func createUser(fromFirebaseUser firebaseUser: User, completion: @escaping (Error?, UserData) -> Void) {
-        let userData = UserData(uid: firebaseUser.uid, displayName: firebaseUser.displayName)
-        
-        var canContinueWithCreatingUser = true
-        
-        self.usersCollection.document(userData.uid).getDocument { (snapshot, error) in
-            if error != nil {
-                completion(error, userData)
-                canContinueWithCreatingUser = false
-            } else if snapshot != nil {
-                let error = NSError(domain: "FirebaseManager", code: 1, userInfo: [NSLocalizedDescriptionKey: UserFacingStrings.Errors.couldNotCreateAccount])
-                completion(error, userData)
-                canContinueWithCreatingUser = false
-            }
-        }
-        
-        guard canContinueWithCreatingUser else { return }
+    public static func createUser(fromFirebaseUser firebaseUser: User, username: String, birthday: Date, completion: @escaping (Error?, UserData) -> Void) {
+        let userData = UserData(uid: firebaseUser.uid, username: username, birthday: birthday, displayName: firebaseUser.displayName ?? username)
         
         self.usersCollection.document(userData.uid).setData([
+            Ids.DatabaseKeys.usernameKey : userData.username,
+            Ids.DatabaseKeys.birthdayKey : userData.birthday,
             Ids.DatabaseKeys.displayNameKey : userData.displayName,
             Ids.DatabaseKeys.picsSentKey : userData.totalPicsSent,
             Ids.DatabaseKeys.picsReceivedKey : userData.totalPicsReceived,
@@ -98,5 +91,10 @@ class FirebaseManager {
         ]) { error in
             completion?(error)
         }
+    }
+    
+    public static func checkIfUsernameIsAvailable(username: String, completion: @escaping (Error?, Bool) -> Void) {
+        // TODO: Implement
+        completion(nil, true)
     }
 }

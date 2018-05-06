@@ -42,10 +42,18 @@ class QPUser {
     }
 }
 
+enum LoginResult {
+    case error
+    case noLoginYet
+    case needMoreInfo
+    case success
+    case alreadyLoggedIn
+}
+
 class QPLoginUser: QPUser {
     public static var loggedInUser: QPLoginUser?
     
-    private static func createNewUserIfPossible(completion: @escaping (Error?) -> Void) {
+    public static func createNewUser(withUsername username: String, birthday: Date, completion: @escaping (Error?) -> Void) {
         guard let firebaseUser = Auth.auth().currentUser,
             self.loggedInUser == nil else {
                 let error = NSError(domain: "QPUser", code: 2, userInfo: [NSLocalizedDescriptionKey : UserFacingStrings.Errors.couldNotCreateAccount])
@@ -53,7 +61,7 @@ class QPLoginUser: QPUser {
                 return
         }
         
-        FirebaseManager.createUser(fromFirebaseUser: firebaseUser) { error, userData in
+        FirebaseManager.createUser(fromFirebaseUser: firebaseUser, username: username, birthday: birthday) { error, userData in
             guard error == nil else {
                 completion(error)
                 return
@@ -64,31 +72,27 @@ class QPLoginUser: QPUser {
         }
     }
     
-    public static func loginUser(completion: @escaping (Error?, QPLoginUser?) -> Void) {
-        guard let firebaseUser = Auth.auth().currentUser,
-            self.loggedInUser == nil else {
-                completion(nil, nil)
-                return
+    public static func loginUser(completion: @escaping (Error?, LoginResult) -> Void) {
+        guard let firebaseUser = Auth.auth().currentUser else {
+            completion(nil, .noLoginYet)
+            return
+        }
+        guard self.loggedInUser == nil else {
+            completion(nil, .alreadyLoggedIn)
+            return
         }
         
         FirebaseManager.lookupUser(uid: firebaseUser.uid) { (error, userData) in
             guard error == nil else {
-                completion(error, nil)
+                completion(error, .error)
                 return
             }
             
             if let userData = userData {
                 self.loggedInUser = QPLoginUser(firebaseUser: firebaseUser, userData: userData)
-                completion(nil, self.loggedInUser)
+                completion(nil, .success)
             } else {
-                self.createNewUserIfPossible(completion: { error in
-                    guard error == nil else {
-                        completion(error, nil)
-                        return
-                    }
-                    
-                    completion(nil, self.loggedInUser)
-                })
+                completion(nil, .needMoreInfo)
             }
         }
     }
