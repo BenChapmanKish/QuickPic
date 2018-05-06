@@ -10,38 +10,6 @@ import UIKit
 import FirebaseAuth
 import FirebaseAuthUI
 
-class QPUser {
-    fileprivate var userData: UserData
-    
-    init(userData: UserData) {
-        self.userData = userData
-    }
-    
-    public static func lookupUser(uid: String, completion: @escaping (QPUser?) -> Void) {
-        FirebaseManager.lookupUser(uid: uid) { (error, userData) in
-            guard error == nil,
-                let userData = userData else {
-                completion(nil)
-                return
-            }
-            completion(QPUser(userData: userData))
-        }
-    }
-    
-    
-    public var name: String {
-        return self.userData.displayName
-    }
-    
-    public var totalPicsSent: Int {
-        return self.userData.totalPicsSent
-    }
-    
-    public var totalPicsReceived: Int {
-        return self.userData.totalPicsReceived
-    }
-}
-
 enum LoginResult {
     case error
     case noLoginYet
@@ -50,8 +18,8 @@ enum LoginResult {
     case alreadyLoggedIn
 }
 
-class QPLoginUser: QPUser {
-    public static var loggedInUser: QPLoginUser?
+class QPUser {
+    public static var loggedInUser: QPUser?
     
     public static func createNewUser(withUsername username: String, birthday: Date, completion: @escaping (Error?) -> Void) {
         guard let firebaseUser = Auth.auth().currentUser,
@@ -67,7 +35,7 @@ class QPLoginUser: QPUser {
                 return
             }
             
-            self.loggedInUser = QPLoginUser(firebaseUser: firebaseUser, userData: userData)
+            self.loggedInUser = QPUser(firebaseUser: firebaseUser, userData: userData)
             completion(nil)
         }
     }
@@ -89,7 +57,7 @@ class QPLoginUser: QPUser {
             }
             
             if let userData = userData {
-                self.loggedInUser = QPLoginUser(firebaseUser: firebaseUser, userData: userData)
+                self.loggedInUser = QPUser(firebaseUser: firebaseUser, userData: userData)
                 completion(nil, .success)
             } else {
                 completion(nil, .needMoreInfo)
@@ -105,11 +73,14 @@ class QPLoginUser: QPUser {
     
     
     private var firebaseUser: User
-    private var friends: [String : QPUser] = [:]
+    private(set) var userData: UserData
+    private var friends: [String : UserData] = [:]
     
     init(firebaseUser: User, userData: UserData) {
         self.firebaseUser = firebaseUser
-        super.init(userData: userData)
+        self.userData = userData
+        
+        self.updateFriends()
     }
     
     public func changeDisplayName(to newName: String, callback: UserProfileChangeCallback? = nil) {
@@ -128,7 +99,7 @@ class QPLoginUser: QPUser {
     
     public func updateFriends() {
         self.userData.friends.forEach { uid in
-            QPUser.lookupUser(uid: uid, completion: { user in
+            FirebaseManager.lookupUser(uid: uid, completion: { (error, user) in
                 if let user = user {
                     self.friends[uid] = user
                 }

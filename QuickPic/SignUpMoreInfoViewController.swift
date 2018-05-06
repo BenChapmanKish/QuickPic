@@ -69,7 +69,7 @@ class SignUpMoreInfoViewController: UIViewController {
                 return
             }
             
-            QPLoginUser.createNewUser(withUsername: username, birthday: birthday, completion: { (error) in
+            QPUser.createNewUser(withUsername: username, birthday: birthday, completion: { (error) in
                 self.hideActivityIndicator(activityIndicator)
                 
                 if let error = error {

@@ -114,7 +114,7 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S2U-e6-svp">
                                 <rect key="frame" x="0.0" y="352" width="320" height="216"/>
                                 <subviews>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53G-lV-69a">
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="53G-lV-69a">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
                                         <date key="date" timeIntervalSinceReferenceDate="547259363.19602597">
                                             <!--2018-05-06 00:29:23 +0000-->
@@ -212,22 +212,23 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt; Name &gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7T-vg-EPg">
-                                <rect key="frame" x="109" y="149" width="102" height="29"/>
+                                <rect key="frame" x="109" y="157" width="102" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt; Stats &gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfN-gV-w5K">
-                                <rect key="frame" x="125" y="238" width="70" height="21"/>
+                                <rect key="frame" x="125" y="245" width="70" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fnk-vm-HeI">
-                                <rect key="frame" x="145" y="178" width="30" height="30"/>
-                                <state key="normal" title="Edit"/>
+                                <rect key="frame" x="114" y="186" width="92" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Change Name"/>
                                 <connections>
-                                    <action selector="editButtonTapped:" destination="oVp-DP-CCu" eventType="touchUpInside" id="Eaw-A9-ucB"/>
+                                    <action selector="changeNameButtonTapped:" destination="oVp-DP-CCu" eventType="touchUpInside" id="e4O-aJ-9uI"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXM-Xp-6y2">
@@ -236,16 +237,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt; Username &gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2v-01-onH">
+                                <rect key="frame" x="105.5" y="116" width="109" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="JfN-gV-w5K" firstAttribute="centerX" secondItem="k7T-vg-EPg" secondAttribute="centerX" id="6GF-N7-emT"/>
                             <constraint firstItem="k7T-vg-EPg" firstAttribute="centerX" secondItem="LDs-R9-qc8" secondAttribute="centerX" id="7ss-Bu-XAG"/>
+                            <constraint firstItem="o2v-01-onH" firstAttribute="top" secondItem="CXM-Xp-6y2" secondAttribute="bottom" constant="50" id="Bij-OQ-QJQ"/>
                             <constraint firstItem="ZkI-nZ-ZDe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CXM-Xp-6y2" secondAttribute="trailing" id="H4z-uo-g66"/>
-                            <constraint firstItem="k7T-vg-EPg" firstAttribute="top" secondItem="LDs-R9-qc8" secondAttribute="top" constant="129" id="K6E-5W-PwX"/>
                             <constraint firstItem="CXM-Xp-6y2" firstAttribute="top" secondItem="LDs-R9-qc8" secondAttribute="top" constant="10" id="MeG-8l-EgF"/>
+                            <constraint firstItem="k7T-vg-EPg" firstAttribute="top" secondItem="o2v-01-onH" secondAttribute="bottom" constant="20" id="Oo4-G8-Kx4"/>
                             <constraint firstItem="ZkI-nZ-ZDe" firstAttribute="centerY" secondItem="CXM-Xp-6y2" secondAttribute="centerY" id="Try-ck-wrw"/>
                             <constraint firstItem="JfN-gV-w5K" firstAttribute="top" secondItem="Fnk-vm-HeI" secondAttribute="bottom" constant="30" id="Tsq-O7-MIP"/>
+                            <constraint firstItem="o2v-01-onH" firstAttribute="centerX" secondItem="k7T-vg-EPg" secondAttribute="centerX" id="YG6-J8-uXf"/>
                             <constraint firstItem="LDs-R9-qc8" firstAttribute="trailing" secondItem="ZkI-nZ-ZDe" secondAttribute="trailing" constant="16" id="Yya-4P-ECr"/>
                             <constraint firstItem="CXM-Xp-6y2" firstAttribute="centerX" secondItem="LDs-R9-qc8" secondAttribute="centerX" id="k4F-28-SLu"/>
                             <constraint firstItem="Fnk-vm-HeI" firstAttribute="top" secondItem="k7T-vg-EPg" secondAttribute="bottom" id="lMS-Uc-ywi"/>
@@ -256,6 +265,7 @@
                     <connections>
                         <outlet property="nameLabel" destination="k7T-vg-EPg" id="MpG-jd-Qt5"/>
                         <outlet property="statsLabel" destination="JfN-gV-w5K" id="LI9-7E-P2H"/>
+                        <outlet property="usernameLabel" destination="o2v-01-onH" id="cjK-fE-YHs"/>
                         <segue destination="V4H-QM-L58" kind="unwind" identifier="unwindToSignIn" animates="NO" unwindAction="unwindToSignInSegue:" id="R6V-F3-du9"/>
                     </connections>
                 </viewController>

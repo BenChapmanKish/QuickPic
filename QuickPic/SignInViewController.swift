@@ -30,7 +30,7 @@ class SignInViewController: UIViewController {
         
         let activityIndicator = self.showActivityIndicator()
         
-        QPLoginUser.loginUser(completion: { (error, loginResult) in
+        QPUser.loginUser(completion: { (error, loginResult) in
             self.hideActivityIndicator(activityIndicator)
             
             if let error = error {

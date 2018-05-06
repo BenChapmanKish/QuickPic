@@ -10,13 +10,13 @@ import UIKit
 import Firebase
 
 class UserData {
-    var uid: String
-    var username: String
-    var birthday: Date
-    var displayName: String
-    var totalPicsSent: Int
-    var totalPicsReceived: Int
-    var friends: [String] // UIDs of friends
+    private(set) var uid: String
+    private(set) var username: String
+    private(set) var birthday: Date
+    private(set) var displayName: String
+    private(set) var totalPicsSent: Int
+    private(set) var totalPicsReceived: Int
+    private(set) var friends: [String] // UIDs of friends
     
     init(uid: String, username: String, birthday: Date, displayName: String, totalPicsSent: Int = 0, totalPicsReceived: Int = 0, friends: [String] = []) {
         self.uid = uid

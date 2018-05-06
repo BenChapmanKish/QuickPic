@@ -11,16 +11,18 @@ import FirebaseAuthUI
 
 class ProfileViewController: UIViewController {
     
+    @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var statsLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let user = QPLoginUser.loggedInUser else { return }
+        guard let user = QPUser.loggedInUser else { return }
         
-        self.nameLabel.text = user.name
-        self.statsLabel.text = "Sent: \(user.totalPicsSent) | Received: \(user.totalPicsReceived)"
+        self.usernameLabel.text = user.userData.username
+        self.nameLabel.text = user.userData.displayName
+        self.statsLabel.text = "Sent: \(user.userData.totalPicsSent) | Received: \(user.userData.totalPicsReceived)"
 
         // Do any additional setup after loading the view.
     }
@@ -41,18 +43,18 @@ class ProfileViewController: UIViewController {
     }
     */
     
-    @IBAction func editButtonTapped(_ sender: UIButton) {
-        self.showEditAlert()
+    @IBAction func changeNameButtonTapped(_ sender: UIButton) {
+        self.showChangeNameAlert()
     }
     
-    private func showEditAlert() {
-        guard let user = QPLoginUser.loggedInUser else { return }
+    private func showChangeNameAlert() {
+        guard let user = QPUser.loggedInUser else { return }
         
         let alert = UIAlertController(title: "Enter name", message: nil, preferredStyle: .alert)
         
         alert.addTextField { textField in
             textField.placeholder = "Display name"
-            textField.text = user.name
+            textField.text = user.userData.displayName
         }
         
         let cancelAction = UIAlertAction(
@@ -76,7 +78,7 @@ class ProfileViewController: UIViewController {
     private func attemptToChangeName(to newName: String) {
         let activityIndicator = self.showActivityIndicator()
         
-        QPLoginUser.loggedInUser?.changeDisplayName(
+        QPUser.loggedInUser?.changeDisplayName(
             to: newName,
             callback: { error in
                 self.hideActivityIndicator(activityIndicator)
@@ -92,7 +94,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func signOutButtonTapped(_ sender: UIButton) {
         do {
-            try QPLoginUser.logout()
+            try QPUser.logout()
             self.performSegue(withIdentifier: Ids.Segues.unwindToSignIn, sender: self)
         } catch {
             self.showGenericErrorAlert(withMessage: error.localizedDescription)
