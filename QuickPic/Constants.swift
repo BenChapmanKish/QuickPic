@@ -26,6 +26,8 @@ struct Ids {
     
     struct DatabaseKeys {
         static let usersCollection = "users"
+        static let picsCollection = "pics"
+        
         static let uidKey = "uid"
         static let usernameKey = "username"
         static let birthdayKey = "birthday"

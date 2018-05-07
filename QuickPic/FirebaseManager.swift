@@ -62,6 +62,10 @@ class FirebaseManager {
         return FirebaseManager.db.collection(Ids.DatabaseKeys.usersCollection)
     }()
     
+    private static var picsCollection: CollectionReference = {
+        return FirebaseManager.db.collection(Ids.DatabaseKeys.picsCollection)
+    }()
+    
     public static func createUser(fromFirebaseUser firebaseUser: User, username: String, birthday: Date, completion: @escaping (Error?, UserData) -> Void) {
         let userData = UserData(uid: firebaseUser.uid, username: username, birthday: birthday, displayName: firebaseUser.displayName ?? username)
         

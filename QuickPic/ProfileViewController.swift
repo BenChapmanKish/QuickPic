@@ -23,8 +23,6 @@ class ProfileViewController: UIViewController {
         self.usernameLabel.text = user.userData.username
         self.nameLabel.text = user.userData.displayName
         self.statsLabel.text = "Sent: \(user.userData.totalPicsSent) | Received: \(user.userData.totalPicsReceived)"
-
-        // Do any additional setup after loading the view.
     }
     
     
