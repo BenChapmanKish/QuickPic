@@ -243,6 +243,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="se7-jD-Vo9">
+                                <rect key="frame" x="118" y="487" width="83" height="30"/>
+                                <state key="normal" title="Add Friends"/>
+                                <connections>
+                                    <action selector="addFriendsButtonTapped:" destination="oVp-DP-CCu" eventType="touchUpInside" id="PoT-Zu-jAC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -256,9 +263,11 @@
                             <constraint firstItem="JfN-gV-w5K" firstAttribute="top" secondItem="Fnk-vm-HeI" secondAttribute="bottom" constant="30" id="Tsq-O7-MIP"/>
                             <constraint firstItem="o2v-01-onH" firstAttribute="centerX" secondItem="k7T-vg-EPg" secondAttribute="centerX" id="YG6-J8-uXf"/>
                             <constraint firstItem="LDs-R9-qc8" firstAttribute="trailing" secondItem="ZkI-nZ-ZDe" secondAttribute="trailing" constant="16" id="Yya-4P-ECr"/>
+                            <constraint firstItem="se7-jD-Vo9" firstAttribute="centerX" secondItem="LDs-R9-qc8" secondAttribute="centerX" id="ffI-pb-Xyi"/>
                             <constraint firstItem="CXM-Xp-6y2" firstAttribute="centerX" secondItem="LDs-R9-qc8" secondAttribute="centerX" id="k4F-28-SLu"/>
                             <constraint firstItem="Fnk-vm-HeI" firstAttribute="top" secondItem="k7T-vg-EPg" secondAttribute="bottom" id="lMS-Uc-ywi"/>
                             <constraint firstItem="Fnk-vm-HeI" firstAttribute="centerX" secondItem="k7T-vg-EPg" secondAttribute="centerX" id="tfh-dU-YeS"/>
+                            <constraint firstItem="LDs-R9-qc8" firstAttribute="bottom" secondItem="se7-jD-Vo9" secondAttribute="bottom" constant="51" id="vul-nH-ZeC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LDs-R9-qc8"/>
                     </view>

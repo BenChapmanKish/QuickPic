@@ -47,6 +47,10 @@ class UserData {
             completion?(error)
         }
     }
+    
+    public func changeFriendsList(to newFriendsList: [String]) {
+        self.friends = newFriendsList
+    }
 }
 
 class FirebaseManager {
@@ -85,9 +89,59 @@ class FirebaseManager {
         }
     }
     
+    public static func addFriend(toUser user: QPUser, withUsername username: String, completion: @escaping (Error?, String?) -> Void) {
+        guard user.userData.username != username else {
+            completion(nil, UserFacingStrings.Friends.cannotAddSelf)
+            return
+        }
+        
+        guard !user.friends.contains(where: { $1.username == username }) else {
+            completion(nil, username + UserFacingStrings.Friends.alreadyIsFriend)
+            return
+        }
+        
+        self.usersCollection.whereField(Ids.DatabaseKeys.usernameKey, isEqualTo: username).getDocuments { (snapshot, error) in
+            guard error == nil else {
+                completion(error, nil)
+                return
+            }
+            
+            guard let uid = snapshot?.documents.first?.documentID else {
+                completion(nil, UserFacingStrings.Friends.noUserFound)
+                return
+            }
+            
+            var newFriendsList = user.userData.friends
+            
+            newFriendsList.append(uid)
+            
+            self.usersCollection.document(user.userData.uid).updateData([
+                Ids.DatabaseKeys.friendsListKey : newFriendsList
+            ]) { error in
+                guard error == nil else {
+                    completion(error, nil)
+                    return
+                }
+                
+                user.userData.changeFriendsList(to: newFriendsList)
+                user.updateFriends(completion: {
+                    completion(nil, username + UserFacingStrings.Friends.friendAdded)
+                })
+            }
+        }
+    }
+    
     public static func changeUser(uid: String, displayNameTo newName: String, completion: ((Error?) -> Void)?) {
         self.usersCollection.document(uid).updateData([
             Ids.DatabaseKeys.displayNameKey : newName
+        ]) { error in
+            completion?(error)
+        }
+    }
+    
+    public static func updateUser(uid: String, friendsListTo newFriendsList: [String], completion: ((Error?) -> Void)?) {
+        self.usersCollection.document(uid).updateData([
+            Ids.DatabaseKeys.friendsListKey : newFriendsList
         ]) { error in
             completion?(error)
         }

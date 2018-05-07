@@ -74,7 +74,8 @@ class QPUser {
     
     private var firebaseUser: User
     private(set) var userData: UserData
-    private var friends: [String : UserData] = [:]
+    private(set) var friends: [String : UserData] = [:]
+    private var fetchingFriends: Bool = false
     
     init(firebaseUser: User, userData: UserData) {
         self.firebaseUser = firebaseUser
@@ -97,11 +98,28 @@ class QPUser {
         }
     }
     
-    public func updateFriends() {
+    public func addFriend(withUsername username: String, completion: @escaping (Error?, String?) -> Void) {
+        FirebaseManager.addFriend(toUser: self, withUsername: username, completion: completion)
+    }
+    
+    public func updateFriends(completion: (() -> Void)? = nil) {
+        guard !self.fetchingFriends,
+            !self.userData.friends.isEmpty else { return }
+        
+        var friendsLeftToFetch = self.userData.friends.count
+        self.fetchingFriends = true
+        
         self.userData.friends.forEach { uid in
             FirebaseManager.lookupUser(uid: uid, completion: { (error, user) in
+                friendsLeftToFetch -= 1
+                
                 if let user = user {
                     self.friends[uid] = user
+                }
+                
+                if (friendsLeftToFetch == 0) {
+                    self.fetchingFriends = false
+                    completion?()
                 }
             })
         }

@@ -42,9 +42,18 @@ struct UserFacingStrings {
         static let couldNotSaveImage = "We couldn't save the image to your camera roll!"
         static let couldNotOpenLoginFlow = "We couldn't open the sign in screen!"
         static let couldNotRetrieveUserData = "We couldn't retrieve your data from the server!"
+        static let problemPerformingOperation = "There was a problem performing that operation!"
         static let couldNotCreateAccount = "We couldn't create your account!"
         static let invalidUsername = "That username is invalid. Please try a different one."
         static let usernameTaken = "That username is already taken. Please try a different one."
+    }
+    
+    struct Friends {
+        static let enterFriendMessage = "Enter the username of the friend you want to add."
+        static let cannotAddSelf = "You can't add yourself as a friend!"
+        static let alreadyIsFriend = " is already in your friends list!"
+        static let friendAdded = " has been added to your friends!"
+        static let noUserFound = "We couldn't find anyone with that username!"
     }
 }
 struct UserDefaultsKeys {

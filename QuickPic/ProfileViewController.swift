@@ -26,22 +26,8 @@ class ProfileViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
     
     @IBAction func changeNameButtonTapped(_ sender: UIButton) {
         self.showChangeNameAlert()
@@ -90,6 +76,46 @@ class ProfileViewController: UIViewController {
                 
                 self.nameLabel.text = newName
         })
+    }
+    
+    @IBAction func addFriendsButtonTapped(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Add Friend", message: UserFacingStrings.Friends.enterFriendMessage, preferredStyle: .alert)
+        
+        alert.addTextField { textField in
+            textField.placeholder = "Username"
+        }
+        
+        let cancelAction = UIAlertAction(
+            title: "Cancel",
+            style: .cancel)
+        
+        let addAction = UIAlertAction(
+            title: "Add",
+            style: .default,
+            handler: { action in
+                guard let username = alert.textFields?[0].text else { return }
+                self.addFriend(withUsername: username)
+        })
+        
+        alert.addAction(cancelAction)
+        alert.addAction(addAction)
+        self.present(alert, animated: true)
+    }
+    
+    private func addFriend(withUsername username: String) {
+        guard let user = QPUser.loggedInUser else { return }
+        
+        let activityIndicator = self.showActivityIndicator()
+        
+        user.addFriend(withUsername: username) { (error, resultMessage) in
+            self.hideActivityIndicator(activityIndicator)
+            
+            if let error = error {
+                self.showGenericErrorAlert(withMessage: error.localizedDescription)
+            } else if let message = resultMessage {
+                self.showAlertWithOkButton(message: message)
+            }
+        }
     }
     
     @IBAction func signOutButtonTapped(_ sender: UIButton) {
