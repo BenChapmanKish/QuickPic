@@ -1,8 +1,21 @@
-.DS_Store
+# Editor temporaries
 *.swp
 *~
+
+# OS X
+.DS_Store
+
+# Xcode
 xcuserdata/
 xcshareddata/
-/Podfile.lock
+**/Podfile.lock
 /pods/
+
+# Node
+node_modules/
+
+# Firebase
 GoogleService-Info.plist
+**/.firebaserc
+.eslintrc.json
+**/package-lock.json
